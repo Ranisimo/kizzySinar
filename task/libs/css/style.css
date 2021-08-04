@@ -1,3 +1,11 @@
+#setSouthEQ, #setEastEQ, #setWestEQ {
+    width: 2em;
+}
+
+#setNorthEQ {
+    width: 10em;
+}
+
 #preloader {
     position: fixed;
     top: 0;
