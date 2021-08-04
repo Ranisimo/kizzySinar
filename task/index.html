@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>List of APIs</title>
         <meta charset="utf-8">
+        <title>List of APIs</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Kizzy Sinar">
         <link href="libs/css/style.css" rel="stylesheet" type="text/css">
     </head>
@@ -35,19 +36,20 @@
                     <tr>
                         <td>1. earthquakes</td>
                         <td>
+                            <form>
                             Returns a list of earthquakes, ordered by magnitude <br>
                             <label for="setNorthEQ">North:</label>
-                            <input id="setNorthEQ" name="setNorthEQ" type="number">
+                            <input id="setNorthEQ" name="setNorthEQ" type="number" value="0">
 
                             <label for="setSouthEQ">South:</label>
-                            <input id="setSouthEQ" name="setSouthEQ" type="number">
+                            <input id="setSouthEQ" name="setSouthEQ" type="number" value="0">
 
                             <label for="setWestEQ">West:</label>
-                            <input id="setWestEQ" name="setWestEQ" type="number">
+                            <input id="setWestEQ" name="setWestEQ" type="number" value="0">
 
                             <label for="setEastEQ">East:</label>
-                            <input id="setEastEQ" name="setEastEQ" type="number">
-
+                            <input id="setEastEQ" name="setEastEQ" type="number" value="0">
+                            </form>
                         </td>
                         <td><button id="btnEarthquakeRun">Run</button></td>
                     </tr>
@@ -65,11 +67,21 @@
                     </tr>
 
                     <tr>
-                        <td id="#firstRow"></td>
-                        <td id="#secondRow"></td>
-                        <td id="#thirdRow"></td>
-                        <td id="#fourthRow"></td>
-                        <td id="#fithRow"></td>
+                        <td id="firstRow">
+
+                        </td>
+                        <td id="secondRow">
+
+                        </td>
+                        <td id="thirdRow">
+
+                        </td>
+                        <td id="fourthRow">
+
+                        </td>
+                        <td id="fithRow">
+                            
+                        </td>
                     </tr>
 
                 </tbody>
@@ -78,7 +90,7 @@
 
         </div>
 
-        <script type="application/javascript" src="libs/js/jquery-2.2.3.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script type="application/javascript" src="libs/js/script.js"></script>
 
     </body>
