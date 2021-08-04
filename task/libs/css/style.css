@@ -1,9 +1,5 @@
-#setSouthEQ, #setEastEQ, #setWestEQ {
-    width: 2em;
-}
-
-#setNorthEQ {
-    width: 10em;
+#setNorthEQ, #setSouthEQ, #setEastEQ, #setWestEQ {
+    width: 3em;
 }
 
 #preloader {

@@ -1,10 +1,10 @@
-/* $(window).on('load', function () {
+$(window).on('load', function () {
     if ($('#preloader').length) {
         $('#preloader').delay(1000).fadeOut('slow',function () {
             $(this).remove();
         });
     }
-}); */
+});
 
 $('#btnEarthquakeRun').on("click", function() {
 
@@ -28,13 +28,13 @@ $('#btnEarthquakeRun').on("click", function() {
                 $('#secondRow').html(result['data'][0]['depth']);
                 $('#thirdRow').html(result['data'][0]['magnitude']);
                 $('#fourthRow').html(result['data'][0]['lng']);
-                $('#fifthRow').html(result['data'][0]['lat']);
+                $('#fifthRow').html(result['data'][0]['lat']); 
 
             }
         
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            // your error code
+            
         }
     }); 
 
