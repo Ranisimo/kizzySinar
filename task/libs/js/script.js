@@ -1,12 +1,4 @@
-$(window).on('load', function () {
-    if ($('#preloader').length) {
-        $('#preloader').delay(1000).fadeOut('slow',function () {
-            $(this).remove();
-        });
-    }
-});
-
-$('#btnEarthquakeRun').on("click", function() {
+$('#btnEarthquakeRun').click(function() {
 
     $.ajax({
         url: "libs/php/earthquake.php",
@@ -102,4 +94,13 @@ $('#btnWikipediaSearch').on("click", function() {
         }
     }); 
 
-}); */
+}); 
+
+
+$(window).on('load', function () {
+    if ($('#preloader').length) {
+        $('#preloader').delay(1000).fadeOut('slow',function () {
+            $(this).remove();
+        });
+    }
+});*/
