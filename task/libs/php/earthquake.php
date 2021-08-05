@@ -3,8 +3,6 @@
 	ini_set('display_errors', 'On');
 	error_reporting(E_ALL);
 
-    echo "Working?";
-
 	$executionStartTime = microtime(true);
 
 	$url='http://api.geonames.org/earthquakesJSON?&north=' . $_REQUEST['north'] . '&south=' . $_REQUEST['south'] . '&east=' . $_REQUEST['east'] . '&west=' . $_REQUEST['west'] . '&username=kizzysinar';
