@@ -1,3 +1,4 @@
+console.log("js Script loaded");
 $('#btnEarthquakeRun').click(function() {
     console.log("Button clicked");
     $.ajax({
