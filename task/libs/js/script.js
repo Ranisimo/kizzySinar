@@ -1,5 +1,5 @@
 $('#btnEarthquakeRun').click(function() {
-
+    console.log("Button clicked");
     $.ajax({
         url: "libs/php/earthquake.php",
         type: 'POST',
@@ -13,6 +13,7 @@ $('#btnEarthquakeRun').click(function() {
         success: function(result) {
 
             console.log(JSON.stringify(result));
+            console.log("JSON stringified");
 
             if (result.status.name == "ok") {
 
@@ -26,11 +27,12 @@ $('#btnEarthquakeRun').click(function() {
         
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            
+            console.log(jqXHR);
         }
     }); 
 
 });
+
 
 /* $('#btnWeatherRun').on("click", function() {
 
@@ -97,10 +99,4 @@ $('#btnWikipediaSearch').on("click", function() {
 }); 
 
 
-$(window).on('load', function () {
-    if ($('#preloader').length) {
-        $('#preloader').delay(1000).fadeOut('slow',function () {
-            $(this).remove();
-        });
-    }
-});*/
+*/
