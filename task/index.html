@@ -5,20 +5,12 @@
         <title>List of APIs</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Kizzy Sinar">
-        <link href="libs/css/style.css" rel="stylesheet" type="text/css">
+        <link href="libs\css\style.css" rel="stylesheet" type="text/css">
     </head>
 
     <body>
-        <div class="header">
-
-        </div>
-
-        <div class="main">
-
-        </div>
-
-        <!--Table with list of APIs-->
-        <div>
+        <!--Table with list of 3 APIs-->
+        <div id="tableAPIs">
             <table>
 
                 <thead>
@@ -39,49 +31,48 @@
                             Returns a list of earthquakes, ordered by magnitude <br>
                             <form>
                             <label for="setNorthEQ">North:</label>
-                            <input id="setNorthEQ" name="setNorthEQ" type="number" value="44.1">
+                            <input class="numberInput" id="setNorthEQ" name="setNorthEQ" type="number" value="44.1">
 
                             <label for="setSouthEQ">South:</label>
-                            <input id="setSouthEQ" name="setSouthEQ" type="number" value="-9.9">
+                            <input class="numberInput" id="setSouthEQ" name="setSouthEQ" type="number" value="-9.9">
 
                             <label for="setWestEQ">West:</label>
-                            <input id="setWestEQ" name="setWestEQ" type="number" value="22.4">
+                            <input class="numberInput" id="setWestEQ" name="setWestEQ" type="number" value="22.4">
 
                             <label for="setEastEQ">East:</label>
-                            <input id="setEastEQ" name="setEastEQ" type="number" value="55.2">
+                            <input class="numberInput" id="setEastEQ" name="setEastEQ" type="number" value="55.2">
                             </form>
                         </td>
                         <td><button id="btnEarthquakeRun">Run</button></td>
                     </tr>
 
-                    <!--<tr>
+                    <tr>
                         <td>2. weather</td>
-                        <td>description</td>
+                        <td>Returns a list of weather stations with the most recent weather observation.
+                            <form>
+                            <label for="setNorthW">North:</label>
+                            <input class="numberInput" id="setNorthW" name="setNorthW" type="number" value="44.1">
+
+                            <label for="setSouthW">South:</label>
+                            <input class="numberInput" id="setSouthW" name="setSouthW" type="number" value="-9.9">
+
+                            <label for="setWestW">West:</label>
+                            <input class="numberInput" id="setWestW" name="setWestW" type="number" value="22.4">
+
+                            <label for="setEastW">East:</label>
+                            <input class="numberInput" id="setEastW" name="setEastW" type="number" value="55.2">
+                            </form></td>
                         <td><button id="btnWeatherRun">Run</button></td>
                     </tr>
 
                     <tr>
                         <td>3. wikipedia search</td>
-                        <td>description</td>
+                        <td>Returns the wikipedia entries found for the searchterm.
+                            <form>
+                            <label for="setPlaceNameWiki">Place Name:</label>
+                            <input id="setPlaceNameWiki" name="setPlaceNameWiki" type="text" value="London">
+                            </form></td>
                         <td><button id="btnWikipediaRun">Run</button></td>
-                    </tr>-->
-
-                    <tr>
-                        <td id="firstRow">
-                            I should post here!
-                        </td>
-                        <td id="secondRow">
-
-                        </td>
-                        <td id="thirdRow">
-
-                        </td>
-                        <td id="fourthRow">
-
-                        </td>
-                        <td id="fithRow">
-                            
-                        </td>
                     </tr>
 
                 </tbody>
@@ -90,16 +81,50 @@
 
         </div>
 
-        <div>
+        <!--Table of results, separate from the table of APIs for formatting reasons-->
+        <div id="results">
             <table>
-                <tr>
-                    <td id="12314123">
+                <tr> <!--Each js script execution changes two things, the title and the content to correspond to the data recieved-->
+                    <td id="firstRowTitle"></td>
+                    <td id="firstRow">
+                    </td>
+                </tr>
 
+                <tr>
+                    <td id="secondRowTitle"></td>
+                    <td id="secondRow">
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td id="thirdRowTitle"></td>
+                    <td id="thirdRow">
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td id="fourthRowTitle"></td>
+                    <td id="fourthRow">
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td id="fifthRowTitle"></td>
+                    <td id="fifthRow">
+                        
                     </td>
                 </tr>
             </table>
         </div>
 
+        <!--Preloader-->
+        <div id="preloader"></div>
+
+        <!--JS Scripts-->
+        <!--Loading js scripts at the end of the body tag to esnure the don't disrupt the loading of the page-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script type="application/javascript" src="libs/js/script.js"></script>
 
