@@ -1,4 +1,13 @@
 console.log("js Script loaded");
+
+$(window).on('load', function () {
+    if (
+        $('#preloader').length) {$('#preloader').delay(1000).fadeOut('slow',function () {
+            $(this).remove();
+        });
+    }
+});
+
 $('#btnEarthquakeRun').click(function() {
     console.log("Button clicked");
     $.ajax({
@@ -18,6 +27,11 @@ $('#btnEarthquakeRun').click(function() {
 
             if (result.status.name == "ok") {
 
+                $('#firstRowTitle').html('Date and Time:');
+                $('#secondRowTitle').html('Depth:');
+                $('#thirdRowTitle').html('Magnitude:');
+                $('#fourthRowTitle').html('Longitude:');
+                $('#fifthRowTitle').html('Latitude:');
                 $('#firstRow').html(result['data'][0]['datetime']);
                 $('#secondRow').html(result['data'][0]['depth']);
                 $('#thirdRow').html(result['data'][0]['magnitude']);
@@ -34,16 +48,17 @@ $('#btnEarthquakeRun').click(function() {
 
 });
 
-
-/* $('#btnWeatherRun').on("click", function() {
+$('#btnWeatherRun').click(function() {
 
     $.ajax({
         url: "libs/php/weather.php",
         type: 'POST',
         dataType: 'json',
         data: {
-            country: $('#selCountry').val(),
-            lang: $('#selLanguage').val()
+            north: $('#setNorthW').val(),
+            south: $('#setSouthW').val(),
+            east: $('#setEastW').val(),
+            west: $('#setWestW').val()
         },
         success: function(result) {
 
@@ -51,31 +66,35 @@ $('#btnEarthquakeRun').click(function() {
 
             if (result.status.name == "ok") {
 
-                $('.firstRow').html(result['data'][0]['datetime']);
-                $('.secondRow').html(result['data'][0]['temperature']);
-                $('.thirdRow').html(result['data'][0]['humidity']);
-                $('.fourthRow').html(result['data'][0]['lng']);
-                $('.fitfhRow').html(result['data'][0]['lat']);
+                $('#firstRowTitle').html('Date and Time:');
+                $('#secondRowTitle').html('Temperature:');
+                $('#thirdRowTitle').html('Humidity:');
+                $('#fourthRowTitle').html('Longitude:');
+                $('#fifthRowTitle').html('Latitude:');
+                $('#firstRow').html(result['data'][0]['datetime']);
+                $('#secondRow').html(result['data'][0]['temperature']);
+                $('#thirdRow').html(result['data'][0]['humidity']);
+                $('#fourthRow').html(result['data'][0]['lng']);
+                $('#fifthRow').html(result['data'][0]['lat']);
 
             }
         
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            // your error code
+            console.log(jqXHR);
         }
     }); 
 
 });
 
-$('#btnWikipediaSearch').on("click", function() {
+$('#btnWikipediaRun').click(function() {
 
     $.ajax({
-        url: "libs/php/getCountryInfo.php",
+        url: "libs/php/wikipediaSearch.php",
         type: 'POST',
         dataType: 'json',
         data: {
-            country: $('#selCountry').val(),
-            lang: $('#selLanguage').val()
+            q: $('#setPlaceNameWiki').val()
         },
         success: function(result) {
 
@@ -83,21 +102,23 @@ $('#btnWikipediaSearch').on("click", function() {
 
             if (result.status.name == "ok") {
 
-                $('.firstRow').html(result['data'][0]['datetime']);
-                $('.secondRow').html(result['data'][0]['temperature']);
-                $('.thirdRow').html(result['data'][0]['humidity']);
-                $('.fourthRow').html(result['data'][0]['lng']);
-                $('.fitfhRow').html(result['data'][0]['lat']);
+                $('#firstRowTitle').html('Title:');
+                $('#secondRowTitle').html('Summary:');
+                $('#thirdRowTitle').html('Feature:');
+                $('#fourthRowTitle').html('Country Code:');
+                $('#fifthRowTitle').html('URL:');
+                $('#firstRow').html(result['data'][0]['title']);
+                $('#secondRow').html(result['data'][0]['summary']);
+                $('#thirdRow').html(result['data'][0]['feature']);
+                $('#fourthRow').html(result['data'][0]['countryCode']);
+                $('#fifthRow').html(result['data'][0]['wikipediaUrl']);
 
             }
         
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            // your error code
+            console.log(jqXHR);
         }
     }); 
 
 }); 
-
-
-*/
