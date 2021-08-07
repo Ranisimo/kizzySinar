@@ -1,7 +1,7 @@
 # kizzySinar
 ITCareerSwitch Projects
 
-##Task
+## Task
 
 For this project, I was given a code example geonamesExample to follow and refer to. I mostly used it to analyse the php files and js ajax syntax to ensure that I understood how the code ran and how to implement it into my own code.
 I chose three APIs from geonames.org that I felt were interesting: earthquakes, weather, and wikipediaSearch.
