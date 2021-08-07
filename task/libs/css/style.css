@@ -1,5 +1,9 @@
-#setNorthEQ, #setSouthEQ, #setEastEQ, #setWestEQ {
+.numberInput {
     width: 3em;
+}
+
+#results {
+    width: 50%;
 }
 
 #preloader {
@@ -11,6 +15,7 @@
     z-index: 9999;
     overflow: hidden;background: #fff;
 }
+
 #preloader:before {
     content: "";
     position: fixed;
