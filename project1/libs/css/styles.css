@@ -10,14 +10,8 @@ select {
 
 #navbar {
     z-index: 2;
-    display: flex;
-    position: fixed;
-    width: 700px;
-    height: auto;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #56829e;
+    position: absolute;
+    margin: auto;
 }
 
 #preloader {
