@@ -4,14 +4,13 @@
     z-index: 1;
 }
 
-select {
-    width: 200px;
-}
-
 #navbar {
     z-index: 2;
     position: absolute;
-    margin: auto;
+    margin-left: 50%;
+    margin-right: 50%;
+    min-width: 70vh;
+    background-color: #56829e;
 }
 
 #preloader {
