@@ -58,3 +58,13 @@
         transform: rotate(360deg);
     }
 }
+
+.custom .leaflet-popup-tip,
+.custom .leaflet-popup-content-wrapper {
+    background: #e93434;
+    color: #ffffff;
+    border-radius: 0 0 0 0;
+    text-align: "center";
+    height: "350px";
+    margin-top: "30px";
+}
