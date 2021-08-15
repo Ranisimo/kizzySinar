@@ -1,4 +1,5 @@
 console.log("script.js Loaded.")
+
 //Preloader
 $(window).on('load', function () {
     if (
@@ -9,7 +10,7 @@ $(window).on('load', function () {
 });
 
 //Loading Map
-var mymap = L.map('mapid').setView([48.85661, 2.3515], 11);
+var mymap = L.map('mapid').locate({setView: true, maxZoom: 16}); //Set Location to Users Location
       L.tileLayer('https://tile.jawg.io/jawg-light/{z}/{x}/{y}{r}.png?access-token=nr1yo2LitcA3V1WiGnpQNQTE2ooNfxu7xxHlxldA7OirWsWMyBSLgoSzyVksXpdG', {}).addTo(mymap);
       mymap.attributionControl.addAttribution("<a href=\"https://www.jawg.io\" target=\"_blank\">&copy; Jawg</a> - <a href=\"https://www.openstreetmap.org\" target=\"_blank\">&copy; OpenStreetMap</a>&nbsp;contributors");
 console.log("Leaflet Map Loaded.")
@@ -39,9 +40,19 @@ function addDataToMap(data, mymap) {
             style: myStyle,
 
             onEachFeature: function (feature, mymap) {
-                mymap.bindPopup(feature.properties.name);
+                var popupFeatureName = feature.properties.name;
+                var popup = L.popup()
+                    .setContent("<div id='cheeseit'>" + popupFeatureName + "</div>")
+                    .openOn(mymap);
+                var popupOptions =
+                    {
+                    'maxWidth': '500',
+                    'className' : 'custom'
+                    }
+                mymap.bindPopup(popup, popupOptions)
         }
     });
     dataLayer.addTo(mymap);
+    
 };
 $.getJSON("libs/json/countryBorders.geo.json", function(data) { addDataToMap(data, mymap); });
