@@ -16,7 +16,7 @@ $('#countrySearch').click(function() {
             if (result.status.name == "ok") {
 
                 console.log("All recieved well.");
-                $('mapid').setView(result['data']['latlng']);
+                mymap.setView(result['coordinates']);
 
             }
         
