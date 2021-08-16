@@ -36,13 +36,18 @@ function addDataToMap(data, mymap) {
         "opacity": 0,
         "fillOpacity": 0
     };
-    var dataLayer = L.geoJson(data, {
+    L.geoJson(data, {
             style: myStyle,
 
             onEachFeature: function (feature, mymap) {
                 var popupFeatureName = feature.properties.name;
                 var popup = L.popup()
-                    .setContent("<div id='cheeseit'>" + popupFeatureName + "</div>")
+                    .setContent
+                        (
+                        "<div id='popupContent'>" 
+                        + popupFeatureName + 
+                        "</div>"
+                        )
                     .openOn(mymap);
                 var popupOptions =
                     {
@@ -51,8 +56,7 @@ function addDataToMap(data, mymap) {
                     }
                 mymap.bindPopup(popup, popupOptions)
         }
-    });
-    dataLayer.addTo(mymap);
+    }).addTo(mymap);
     
 };
 $.getJSON("libs/json/countryBorders.geo.json", function(data) { addDataToMap(data, mymap); });
