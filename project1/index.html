@@ -6,7 +6,7 @@
     <title>Gazetteer</title>
 
     <!--Bootstrap Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
     <!--My Stylesheet-->
     <link rel="stylesheet" href="libs\css\styles.css"/>
@@ -14,19 +14,19 @@
     <!--Leaflet's Stylesheet and Script-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="libs\javascript\libraries\leaflet.ajax.min.js"></script>
   </head>
 
   <body>
     <!--Preloader-->
     <div id="preloader"></div>
 
-    <div id="navbar">
-      <label for="countrySelect">Select a country from the list:</label>
-        <select
-          id="countrySelect"
-          name="countrySelect">
-        </select>
+    <div class="mainContainer">
+      <div id="nav">
+        <label for="countrySelect">View Country:</label>
+        <select autocomplete="on" id="countrySelect" name="countrySelect"></select>
         <button id="countrySearch">Search</button>
+      </div>
     </div>
 
     <!--Map-->
@@ -36,10 +36,11 @@
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <!--My Scripts-->
     <script src="libs\javascript\script.js"></script>
-    <script src="libs\javascript\getPHP.js"></script>
+    <script src="libs\javascript\locateCountry.js"></script>
+    <script src="libs\javascript\geoJSONLayer.js"></script>
   </body>
 
 </html>
