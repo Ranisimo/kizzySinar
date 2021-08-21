@@ -150,8 +150,6 @@ function onEachFeature(f,l){
                         'className' : 'custom'
                         }
                     l.bindPopup(popupContent, popupOptions);
-
-                    return f;
                 }
             
             },
