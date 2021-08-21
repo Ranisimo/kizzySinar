@@ -14,43 +14,77 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 9999;
-    overflow: hidden;background: #fff;
+    /* you can change color of mask here*/
+    background: #f3f3f3;
+    z-index: 99;
+    /* makes sure it stays on top */
 }
 
-#preloader:before {
-    content: "";
-    position: fixed;
-    top: calc(50% - 30px);
-    left: calc(50% - 30px);
-    border: 6px solid #f2f2f2;
-    border-top: 6px solid #56829e ;
+#nest5 {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 50px;
+    width: 50px;
+    margin: -25px 0 0 -25px;
+    border: 2px solid transparent;
+    border-top-color: #008744;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    -webkit-animation: animate-preloader 1s linear infinite;
-    animation: animate-preloader 2s linear infinite;
+    -webkit-animation: spin11 2s linear infinite;
+            animation: spin11 2s linear infinite;
 }
-    
-@-webkit-keyframes animate-preloader {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
+  
+#nest5:before {
+    content: "";
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    bottom: 7px;
+    left: 7px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    border-top-color: #d62d20;
+    -webkit-animation: spin11 3s linear infinite;
+            animation: spin11 3s linear infinite;
+}
+  
+#nest5:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    border-top-color: #ffa700;
+    -webkit-animation: spin11 1.5s linear infinite;
+            animation: spin11 1.5s linear infinite;
+}
+  
+@-webkit-keyframes spin11 {
+    from {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
     }
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
+    to {
+      -webkit-transform: rotate(359deg);
+              transform: rotate(359deg);
     }
 }
-    
-@keyframes animate-preloader {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
+@keyframes spin11 {
+    from {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
     }
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
+    to {
+      -webkit-transform: rotate(359deg);
+              transform: rotate(359deg);
+      -webkit-transform: rotate(359deg);
+              transform: rotate(359deg);
     }
 }
 
