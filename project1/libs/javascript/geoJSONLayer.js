@@ -82,7 +82,8 @@ function onEachFeature(f,l){
 
                 var popupCreateAdditionalInfoButton = document.createElement("button");
                     popupCreateAdditionalInfoButton.innerHTML = "Protected Planet";
-                    popupCreateAdditionalInfoButton.addEventListener("click", getProtectedPlanetAPI(f));
+                    popupCreateAdditionalInfoButton.onclick = getProtectedPlanetAPI;
+                    
 
 
 
@@ -136,6 +137,8 @@ function onEachFeature(f,l){
                         'className' : 'custom'
                         }
                     l.bindPopup(popupContent, popupOptions);
+
+                    return f;
                 }
             
             },
@@ -143,28 +146,41 @@ function onEachFeature(f,l){
                 console.log(jqXHR);
             }
     });
+    var getProtectedPlanetAPI = function(f) {
+        console.log("Button clicked");
+    
+        $.ajax({
+            url: "libs/php/getProtectedPlanet.php",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                iso: isoa3
+            },
+            success: function(result) {
+    
+                var expandedSection = document.createElement("div");
+                    expandedSection.className = "container";
+                    expandedSection.id = "expandedSection";
+                
+                var expandedSectionCreateMarineProtectedArea = document.createElement("div");
+                    expandedSectionCreateMarineProtectedArea.className = "row";
+                    var MarineProtectedArea = document.createElement("div");
+                        MarineProtectedArea.className = "col";
+                        MarineProtectedArea.innerText = "1000 skm";
+                expandedSectionCreateMarineProtectedArea.appendChild(MarineProtectedArea);
+    
+                expandedSection.appendChild(expandedSectionCreateMarineProtectedArea);
+                popupCreateContainingDivElement.appendChild(expandedSection);
+    
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+    };
+
 };
 
-var getProtectedPlanetAPI = function(f) {
-    var isoa3 = f.properties.iso_a3;
-
-    $.ajax({
-        url: "libs/php/getProtectedPlanet.php",
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            iso: isoa3
-        },
-        success: function(result) {
-
-            console.log(JSON.stringify(result))
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-        }
-    });
-};
 
 var myStyle = {
     "color": "#36454f",
