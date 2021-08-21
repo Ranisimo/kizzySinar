@@ -18,8 +18,12 @@ function onEachFeature(f,l){
                 let popStr = pop.toLocaleString("en-US");
                 
                 //Popup Content
+
                 var popupCreateContainingDivElement = document.createElement("div");
                     popupCreateContainingDivElement.className = "container";
+
+                var popupCreateMainDivElement = document.createElement("div");
+                    popupCreateMainDivElement.className = "container";
 
                 var popupCreateCountryNameHeading = document.createElement("div");
                     popupCreateCountryNameHeading.innerHTML = f.properties.name;
@@ -85,15 +89,24 @@ function onEachFeature(f,l){
                     popupCreateAdditionalInfoButton.onclick = getProtectedPlanetAPI;
                     
 
+                popupCreateMainDivElement.appendChild(popupCreateCountryNameHeading);
+                popupCreateMainDivElement.appendChild(popupCreateCapitalTR);
+                popupCreateMainDivElement.appendChild(popupCreatePopulationTR);
+                popupCreateMainDivElement.appendChild(popupCreateDemonymTR);
+                popupCreateMainDivElement.appendChild(popupCreateLanguagesTR);
+                popupCreateMainDivElement.appendChild(popupCreateRegionTR);
+                popupCreateMainDivElement.appendChild(popupCreateAdditionalInfoButton);
+
+                popupCreateContainingDivElement.appendChild(popupCreateMainDivElement);
 
 
-                popupCreateContainingDivElement.appendChild(popupCreateCountryNameHeading);
-                popupCreateContainingDivElement.appendChild(popupCreateCapitalTR);
-                popupCreateContainingDivElement.appendChild(popupCreatePopulationTR);
-                popupCreateContainingDivElement.appendChild(popupCreateDemonymTR);
-                popupCreateContainingDivElement.appendChild(popupCreateLanguagesTR);
-                popupCreateContainingDivElement.appendChild(popupCreateRegionTR);
-                popupCreateContainingDivElement.appendChild(popupCreateAdditionalInfoButton);
+
+                var expandedSection = document.createElement("div");
+                    expandedSection.className = "container";
+                    expandedSection.id = "expandedSection";
+                
+                popupCreateContainingDivElement.appendChild(expandedSection);
+
 
                 if (result.status.name == "ok") {
 
@@ -146,8 +159,9 @@ function onEachFeature(f,l){
                 console.log(jqXHR);
             }
     });
-    var getProtectedPlanetAPI = function(f) {
+    var getProtectedPlanetAPI = function() {
         console.log("Button clicked");
+        console.log(isoa3);
     
         $.ajax({
             url: "libs/php/getProtectedPlanet.php",
@@ -158,19 +172,15 @@ function onEachFeature(f,l){
             },
             success: function(result) {
     
-                var expandedSection = document.createElement("div");
-                    expandedSection.className = "container";
-                    expandedSection.id = "expandedSection";
-                
-                var expandedSectionCreateMarineProtectedArea = document.createElement("div");
-                    expandedSectionCreateMarineProtectedArea.className = "row";
+
                     var MarineProtectedArea = document.createElement("div");
-                        MarineProtectedArea.className = "col";
-                        MarineProtectedArea.innerText = "1000 skm";
-                expandedSectionCreateMarineProtectedArea.appendChild(MarineProtectedArea);
+                        MarineProtectedArea.className = "row";
+                        var MarineProtectedAreaTD = document.createElement("div");
+                            MarineProtectedAreaTD.className = "col";
+                            MarineProtectedAreaTD.innerText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
+                    MarineProtectedArea.appendChild(MarineProtectedAreaTD);
     
-                expandedSection.appendChild(expandedSectionCreateMarineProtectedArea);
-                popupCreateContainingDivElement.appendChild(expandedSection);
+                expandedSection.appendChild(MarineProtectedArea);
     
             },
             error: function(jqXHR, textStatus, errorThrown) {
