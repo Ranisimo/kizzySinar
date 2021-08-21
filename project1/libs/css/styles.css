@@ -54,11 +54,16 @@
     }
 }
 
-.custom .leaflet-popup-tip,
 .custom .leaflet-popup-content-wrapper {
     background: #c8d860;
     color: black;
     border-radius: 0 0 50px 0;
+    box-shadow: 7px 7px 0px 2px #2A1A1F;
+}
+
+.custom .leaflet-popup-tip {
+    background: #c8d860;
+    color: black;
     box-shadow: 7px 7px 0px 2px #2A1A1F;
 }
 
@@ -79,6 +84,7 @@
 }
 
 #expandedSection {
-    display: block;
     position: relative;
+    min-height: 100px;
+    background-color: #2A1A1F;
 }
