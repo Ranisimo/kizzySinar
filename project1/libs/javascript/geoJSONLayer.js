@@ -19,6 +19,7 @@ function onEachFeature(f,l){
                 
                 //Popup Content
 
+                //Holds two divs, one for the REST Countries API, second for the Protected Planet API
                 var popupCreateContainingDivElement = document.createElement("div");
                     popupCreateContainingDivElement.className = "container";
 
@@ -32,7 +33,7 @@ function onEachFeature(f,l){
                 var popupCreateCapitalTR = document.createElement("div");
                     popupCreateCapitalTR.className = "row";
                     var popupCreateCapitalTD = document.createElement("div");
-                        popupCreateCapitalTD.className = "col";
+                        popupCreateCapitalTD.className = "col font-weight-bold";
                         popupCreateCapitalTD.innerText = "Capital:";
                     var popupCreateCapitalResultTD = document.createElement("div");
                         popupCreateCapitalResultTD.className = "col";
@@ -43,7 +44,7 @@ function onEachFeature(f,l){
                 var popupCreatePopulationTR = document.createElement("div");
                     popupCreatePopulationTR.className = "row";
                     var popupCreatePopulationTD = document.createElement("div");
-                        popupCreatePopulationTD.className = "col";
+                        popupCreatePopulationTD.className = "col font-weight-bold";
                         popupCreatePopulationTD.innerText = "Population:";
                     var popupCreatePopulationResultTD = document.createElement("div");
                         popupCreatePopulationResultTD.className = "col";
@@ -54,7 +55,7 @@ function onEachFeature(f,l){
                 var popupCreateDemonymTR = document.createElement("div");
                     popupCreateDemonymTR.className = "row";
                     var popupCreateDemonymTD = document.createElement("div");
-                        popupCreateDemonymTD.className = "col";
+                        popupCreateDemonymTD.className = "col font-weight-bold";
                         popupCreateDemonymTD.innerText = "Demonym:"
                     var popupCreateDemonymResultTD = document.createElement("div");
                         popupCreateDemonymResultTD.className = "col";
@@ -65,7 +66,7 @@ function onEachFeature(f,l){
                 var popupCreateLanguagesTR = document.createElement("div");
                     popupCreateLanguagesTR.className = "row";
                     var popupCreateLanguagesTD = document.createElement("div");
-                        popupCreateLanguagesTD.className = "col";
+                        popupCreateLanguagesTD.className = "col font-weight-bold";
                         popupCreateLanguagesTD.innerText = "Languages:";
                     var popupCreateLanguagesResultTD = document.createElement("div");
                         popupCreateLanguagesResultTD.className = "col";
@@ -76,7 +77,7 @@ function onEachFeature(f,l){
                 var popupCreateRegionTR = document.createElement("div");
                     popupCreateRegionTR.className = "row";
                     var popupCreateRegionTD = document.createElement("div");
-                        popupCreateRegionTD.className = "col";
+                        popupCreateRegionTD.className = "col font-weight-bold";
                         popupCreateRegionTD.innerText = "Region:";
                     var popupCreateRegionResultTD = document.createElement("div");
                         popupCreateRegionResultTD.className = "col";
@@ -84,10 +85,6 @@ function onEachFeature(f,l){
                 popupCreateRegionTR.appendChild(popupCreateRegionTD);
                 popupCreateRegionTR.appendChild(popupCreateRegionResultTD);
 
-                var popupCreateAdditionalInfoButton = document.createElement("button");
-                    popupCreateAdditionalInfoButton.innerHTML = "Protected Planet";
-                    popupCreateAdditionalInfoButton.onclick = getProtectedPlanetAPI;
-                    
 
                 popupCreateMainDivElement.appendChild(popupCreateCountryNameHeading);
                 popupCreateMainDivElement.appendChild(popupCreateCapitalTR);
@@ -95,17 +92,31 @@ function onEachFeature(f,l){
                 popupCreateMainDivElement.appendChild(popupCreateDemonymTR);
                 popupCreateMainDivElement.appendChild(popupCreateLanguagesTR);
                 popupCreateMainDivElement.appendChild(popupCreateRegionTR);
-                popupCreateMainDivElement.appendChild(popupCreateAdditionalInfoButton);
 
                 popupCreateContainingDivElement.appendChild(popupCreateMainDivElement);
-
-
-
+                
+                //Section that contains Protected Planet API Data
                 var expandedSection = document.createElement("div");
                     expandedSection.className = "container";
                     expandedSection.id = "expandedSection";
+                    expandedSection.hidden = true;
                 
                 popupCreateContainingDivElement.appendChild(expandedSection);
+
+                //Button disables after first click to prevent multiple API calls
+                var popupCreateAdditionalInfoButton = document.createElement("button");
+                    popupCreateAdditionalInfoButton.innerHTML = "Protected Planet";
+                    popupCreateAdditionalInfoButton.onclick = getProtectedPlanetAPI;
+                    popupCreateAdditionalInfoButton.addEventListener("click", function() {
+                        var x = this;
+                        if (x.style.display === "none") {
+                          x.style.display = "block";
+                        } else {
+                          x.style.display = "none";
+                        }
+                    });
+                
+                popupCreateContainingDivElement.appendChild(popupCreateAdditionalInfoButton);
 
 
                 if (result.status.name == "ok") {
@@ -158,8 +169,6 @@ function onEachFeature(f,l){
             }
     });
     var getProtectedPlanetAPI = function() {
-        console.log("Button clicked");
-        console.log(isoa3);
     
         $.ajax({
             url: "libs/php/getProtectedPlanet.php",
@@ -169,26 +178,105 @@ function onEachFeature(f,l){
                 iso: isoa3
             },
             success: function(result) {
-    
 
-                    var MarineProtectedArea = document.createElement("div");
-                        MarineProtectedArea.className = "row";
-                        var MarineProtectedAreaTD = document.createElement("div");
-                            MarineProtectedAreaTD.className = "col";
-                            MarineProtectedAreaTD.innerText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
+                expandedSection.hidden = false;
+                
+                var protectedPlanetTitle = document.createElement("div");
+                    protectedPlanetTitle.innerHTML = "Protected Planet";
+                    protectedPlanetTitle.className = "h4";
+
+                var LandArea = document.createElement("div");
+                    LandArea.className = "row";
+                    var LandAreaTD = document.createElement("div");
+                        LandAreaTD.className = "col font-weight-bold";
+                        LandAreaTD.innerText = "Land Area:"
+                    var LandAreaResultTD = document.createElement("div");
+                        LandAreaResultTD.className = "col";
+                        LandAreaResultTD.innerText = (Math.round(result['landarea'] * 100) / 100).toLocaleString("en-US")  + " km2";
+                    LandArea.appendChild(LandAreaTD);
+                    LandArea.appendChild(LandAreaResultTD);
+
+                var MarineArea = document.createElement("div");
+                    MarineArea.className = "row";
+                    var MarineAreaTD = document.createElement("div");
+                        MarineAreaTD.className = "col font-weight-bold";
+                        MarineAreaTD.innerText = "Marine Area:"
+                    var MarineAreaResultTD = document.createElement("div");
+                        MarineAreaResultTD.className = "col";
+                        MarineAreaResultTD.innerText = (Math.round(result['marinearea'] * 100) / 100).toLocaleString("en-US")  + " km2";
+                    MarineArea.appendChild(MarineAreaTD);
+                    MarineArea.appendChild(MarineAreaResultTD);
+
+                var LandProtectedArea = document.createElement("div");
+                    LandProtectedArea.className = "row";
+                    var LandProtectedAreaTD = document.createElement("div");
+                        LandProtectedAreaTD.className = "col font-weight-bold";
+                        LandProtectedAreaTD.innerText = "Protected Land Area:";
+                    var LandProtectedAreaResultTD = document.createElement("div");
+                        LandProtectedAreaResultTD.className = "col";
+                        LandProtectedAreaResultTD.innerText = (Math.round(result['palandarea'] * 100) / 100).toLocaleString("en-US")  + " km2";
+                    LandProtectedArea.appendChild(LandProtectedAreaTD);
+                    LandProtectedArea.appendChild(LandProtectedAreaResultTD);
+
+                var MarineProtectedArea = document.createElement("div");
+                    MarineProtectedArea.className = "row";
+                    var MarineProtectedAreaTD = document.createElement("div");
+                        MarineProtectedAreaTD.className = "col font-weight-bold";
+                        MarineProtectedAreaTD.innerText = "Protected Marine Area:";
+                    var MarineProtectedAreaResultTD = document.createElement("div");
+                        MarineProtectedAreaResultTD.className = "col";
+                        MarineProtectedAreaResultTD.innerText = (Math.round(result['pamarinearea'] * 100) / 100).toLocaleString("en-US")  + " km2";
                     MarineProtectedArea.appendChild(MarineProtectedAreaTD);
-    
+                    MarineProtectedArea.appendChild(MarineProtectedAreaResultTD);
+
+                var PercentLandProtectedArea = document.createElement("div");
+                    PercentLandProtectedArea.className = "row";
+                    var PercentLandProtectedAreaTD = document.createElement("div");
+                        PercentLandProtectedAreaTD.className = "col font-weight-bold";
+                        PercentLandProtectedAreaTD.innerText = "Percent of Land Protected:";
+                    var PercentLandProtectedAreaResultTD = document.createElement("div");
+                        PercentLandProtectedAreaResultTD.className = "col";
+                        PercentLandProtectedAreaResultTD.innerText = (Math.round(result['percentpalandarea'] * 100) / 100).toLocaleString("en-US")  + " %";
+                    PercentLandProtectedArea.appendChild(PercentLandProtectedAreaTD);
+                    PercentLandProtectedArea.appendChild(PercentLandProtectedAreaResultTD);
+
+                var PercentMarineProtectedArea = document.createElement("div");
+                    PercentMarineProtectedArea.className = "row";
+                    var PercentMarineProtectedAreaTD = document.createElement("div");
+                        PercentMarineProtectedAreaTD.className = "col font-weight-bold";
+                        PercentMarineProtectedAreaTD.innerText = "Percent of Marine Protected:";
+                    var PercentMarineProtectedAreaResultTD = document.createElement("div");
+                        PercentMarineProtectedAreaResultTD.className = "col";
+                        PercentMarineProtectedAreaResultTD.innerText = (Math.round(result['percentpamarinearea'] * 100) / 100).toLocaleString("en-US")  + " %";
+                    PercentMarineProtectedArea.appendChild(PercentMarineProtectedAreaTD);
+                    PercentMarineProtectedArea.appendChild(PercentMarineProtectedAreaResultTD);
+
+                var linkProtectedPlanet = document.createElement("div");
+                var aTag = document.createElement("a");
+                    var link = "https://www.protectedplanet.net/country/" + isoa3;
+                    aTag.href = link;
+                    aTag.target = "_blank";
+                    aTag.innerText = "View more here";
+                linkProtectedPlanet.appendChild(aTag);
+
+                expandedSection.appendChild(protectedPlanetTitle);
+                expandedSection.appendChild(LandArea);
+                expandedSection.appendChild(MarineArea);
+                expandedSection.appendChild(LandProtectedArea);
                 expandedSection.appendChild(MarineProtectedArea);
+                expandedSection.appendChild(PercentLandProtectedArea);
+                expandedSection.appendChild(PercentMarineProtectedArea);
+                expandedSection.appendChild(linkProtectedPlanet);
     
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);
             }
         });
+
     };
 
 };
-
 
 var myStyle = {
     "color": "#36454f",
