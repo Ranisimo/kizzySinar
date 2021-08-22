@@ -8,9 +8,6 @@ $('#countrySearch').click(function() {
         },
         success: function(result) {
 
-            console.log(JSON.stringify(result));
-            console.log("JSON stringified");
-
             if (result.status.name == "ok") {
 
                 mymap.setView(result['coordinates']);
