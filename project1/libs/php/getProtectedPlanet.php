@@ -23,7 +23,12 @@
 	$output['status']['name'] = "ok";
 	$output['status']['description'] = "success";
 	$output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
-	$output['output'] = $decode['country']['statistics'];
+	$output['landarea'] = $decode['country']['statistics']['land_area'];
+	$output['marinearea'] = $decode['country']['statistics']['marine_area'];
+	$output['palandarea'] = $decode['country']['statistics']['pa_land_area'];
+	$output['pamarinearea'] = $decode['country']['statistics']['pa_marine_area'];
+	$output['percentpalandarea'] = $decode['country']['statistics']['percentage_pa_land_cover'];
+	$output['percentpamarinearea'] = $decode['country']['statistics']['percentage_pa_marine_cover'];
 	
 	header('Content-Type: application/json; charset=UTF-8');
 
