@@ -119,6 +119,10 @@
 
 #expandedSection {
     position: relative;
-    min-height: 100px;
-    background-color: #2A1A1F;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: antiquewhite;
+    box-shadow: 3px 3px 0px 1px #2A1A1F;
 }
