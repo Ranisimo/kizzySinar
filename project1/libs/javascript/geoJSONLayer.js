@@ -1,4 +1,5 @@
 //For each country, a popup is bound.
+var weather = "";
 function onEachFeature(f,l){
     var isoa3 = f.properties.iso_a3;
     var popupContent = "";
@@ -11,10 +12,7 @@ function onEachFeature(f,l){
                 iso: isoa3
             },
             success: function(result) {
-               // console.log(JSON.stringify(result));
-               // console.log("JSON stringified");
-            
-                let pop = result["population"];
+                let pop = result['population'];
                 let popStr = pop.toLocaleString("en-US");
                 
                 //Popup Content
@@ -37,7 +35,7 @@ function onEachFeature(f,l){
                         popupCreateCapitalTD.innerText = "Capital:";
                     var popupCreateCapitalResultTD = document.createElement("div");
                         popupCreateCapitalResultTD.className = "col";
-                        popupCreateCapitalResultTD.innerText = result["capital"];
+                        popupCreateCapitalResultTD.innerText = result['capital'];
                 popupCreateCapitalTR.appendChild(popupCreateCapitalTD);
                 popupCreateCapitalTR.appendChild(popupCreateCapitalResultTD);
 
@@ -70,7 +68,7 @@ function onEachFeature(f,l){
                         popupCreateLanguagesTD.innerText = "Languages:";
                     var popupCreateLanguagesResultTD = document.createElement("div");
                         popupCreateLanguagesResultTD.className = "col";
-                        popupCreateLanguagesResultTD.innerText = result["languages"];
+                        popupCreateLanguagesResultTD.innerHTML = result["languages"].map(lang => lang.name).join(", ") + ".";
                 popupCreateLanguagesTR.appendChild(popupCreateLanguagesTD);
                 popupCreateLanguagesTR.appendChild(popupCreateLanguagesResultTD);
 
@@ -94,6 +92,25 @@ function onEachFeature(f,l){
                 popupCreateMainDivElement.appendChild(popupCreateRegionTR);
 
                 popupCreateContainingDivElement.appendChild(popupCreateMainDivElement);
+
+                //Section that contains OpenWeather API Data
+                var weatherSection = document.createElement("div");
+                    weatherSection.className = "container";
+                    weatherSection.id = "weatherSection";
+                    var weatherMain = document.createElement("div");
+                        weatherMain.className = "row";
+                        var weatherMainTD = document.createElement("div");
+                            weatherMainTD.className = "col font-weight-bold";
+                            weatherMainTD.innerText = "Weather:";
+                        var weatherMainResultTD = document.createElement("div");
+                            weatherMainResultTD.className = "col font-weight-bold";
+                            weatherMainResultTD.innerText = updateWeather;
+                weatherMain.appendChild(weatherMainTD);
+                weatherMain.appendChild(weatherMainResultTD);
+
+                weatherSection.appendChild(weatherMain);
+                
+                popupCreateContainingDivElement.appendChild(weatherSection);
                 
                 //Section that contains Protected Planet API Data
                 var expandedSection = document.createElement("div");
@@ -159,7 +176,7 @@ function onEachFeature(f,l){
                         {
                         'minWidth': '300',
                         'className' : 'custom'
-                        }
+                        };
                     l.bindPopup(popupContent, popupOptions);
                 }
             
@@ -168,8 +185,8 @@ function onEachFeature(f,l){
                 console.log(jqXHR);
             }
     });
+
     var getProtectedPlanetAPI = function() {
-    
         $.ajax({
             url: "libs/php/getProtectedPlanet.php",
             type: 'POST',
@@ -275,7 +292,6 @@ function onEachFeature(f,l){
         });
 
     };
-
 };
 
 var myStyle = {
@@ -289,3 +305,27 @@ var geoJSONLayer = new L.GeoJSON.AJAX('libs/json/countryBorders.geo.json',{
     style: myStyle, 
     onEachFeature: onEachFeature
 }).addTo(mymap);
+
+var updateWeather = geoJSONLayer.on('click', function(e) {
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
+    
+    $.ajax({
+        url: "libs/php/getWeatherData.php",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            lat: lat,
+            lng: lng
+        },
+        success: function(result) {
+                
+                weather = result['weather'];
+                console.log(weather);   
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }   
+    });
+});
