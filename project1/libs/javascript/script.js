@@ -147,6 +147,16 @@ var geoJSONLayer = new L.GeoJSON.AJAX('vendors/json/countryBorders.geo.json',{
     onEachFeature: onEachFeature
 }).addTo(mymap);
 
+function markerModal(f,l) {
+    l.on('click', function() {
+        document.getElementById('featureName').innerText = f.properties.NAME;
+            $('#modalMarker').modal('show');
+    })
+};
+
+var markersLayer = new L.GeoJSON.AJAX('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson',{
+    onEachFeature: markerModal
+}).addTo(mymap); 
 
 /* var updateWeather = geoJSONLayer.on('click', function(e) {
     var lat = e.latlng.lat;
