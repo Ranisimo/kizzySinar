@@ -78,8 +78,8 @@ var thisFeature = "";
 
 function onEachFeature(f, l){
     var isoa3 = f.properties.iso_a3;
-    
-    $.ajax({
+    l.on('click', function(e) {
+        $.ajax({
             url: "libs/php/getRESTCountryInfo.php",
             type: 'POST',
             dataType: 'json',
@@ -214,14 +214,16 @@ function onEachFeature(f, l){
                 
                 popupCreateContainingModal.appendChild(popupCreateAdditionalInfoButton);
                 modalContent.appendChild(popupCreateContainingModal);
+
+                e = modalContent;
             
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);
             }
-    });
+        });
 
-    var getProtectedPlanetAPI = function() {
+        var getProtectedPlanetAPI = function() {
         $.ajax({
             url: "libs/php/getProtectedPlanet.php",
             type: 'POST',
@@ -325,8 +327,11 @@ function onEachFeature(f, l){
                 console.log(jqXHR);
             }
         });
+        };
 
-    };
+        $('#modalPopup').html(e);
+        $('#modalPopup').modal('show');
+    });
 };
 
 var myStyle = {
@@ -364,9 +369,3 @@ var geoJSONLayer = new L.GeoJSON.AJAX('libs/json/countryBorders.geo.json',{
         }   
     });
 }); */
-
-geoJSONLayer.on('click', function polygonOnClick(e) {
-    var feature = e.modalContent;
-    $('.modal-content').html(feature);
-    $('#modalPopup').modal('toggle');
-});
