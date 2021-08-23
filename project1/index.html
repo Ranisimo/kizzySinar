@@ -25,10 +25,11 @@
     <div class="mainContainer">
       <div id="nav">
         <label for="countrySelect">View Country:</label>
-        <select autocomplete="on" id="countrySelect" name="countrySelect"></select>
-        <button id="countrySearch">Search</button>
+        <select autocomplete="on" id="countrySelect" name="countrySelect" onChange="setView()"=></select>
       </div>
     </div>
+
+    <div id="modalPopup" class="modal-dialog"></div>
 
     <!--Map-->
     <div id="mapid"></div>
@@ -40,8 +41,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <!--My Scripts-->
     <script src="libs\javascript\script.js"></script>
-    <script src="libs\javascript\locateCountry.js"></script>
-    <script src="libs\javascript\geoJSONLayer.js"></script>
   </body>
 
 </html>
