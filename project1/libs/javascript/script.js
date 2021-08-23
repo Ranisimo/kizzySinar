@@ -214,8 +214,6 @@ function onEachFeature(f, l){
                 
                 popupCreateContainingModal.appendChild(popupCreateAdditionalInfoButton);
                 modalContent.appendChild(popupCreateContainingModal);
-                
-                thisFeature = modalContent;
             
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -367,7 +365,8 @@ var geoJSONLayer = new L.GeoJSON.AJAX('libs/json/countryBorders.geo.json',{
     });
 }); */
 
-geoJSONLayer.on('click', function(e) {
-    e = thisFeatre;
-    $('#modalPopup').modal('toggle').append(e);
+geoJSONLayer.on('click', function polygonOnClick(e) {
+    var feature = e.modalContent;
+    $('.modal-content').html(feature);
+    $('#modalPopup').modal('toggle');
 });
