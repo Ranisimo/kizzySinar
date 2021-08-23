@@ -211,7 +211,7 @@ function onEachFeature(f, l){
                 popupCreateContainingModal.appendChild(popupCreateAdditionalInfoButton);
                 
 
-                $('#modalPopup').append(popupCreateContainingModal);
+                $('#modalPopup').modal();
             
             },
             error: function(jqXHR, textStatus, errorThrown) {
