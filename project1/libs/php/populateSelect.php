@@ -4,7 +4,7 @@
 
     $executionStartTime = microtime(true);
 
-    $result=file_get_contents('C:\Users\roist\git_repositories\kizzySinar\project1\libs\json\countryBorders.geo.json');
+    $result=file_get_contents('C:\xampp\htdocs\project1\vendors\json\countryBorders.geo.json');
 
     $decode = json_decode($result,true);    
 
