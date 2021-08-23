@@ -88,17 +88,15 @@
     }
 }
 
-.custom .leaflet-popup-content-wrapper {
+.custom {
     background: #c8d860;
     color: black;
     border-radius: 0 0 50px 0;
     box-shadow: 7px 7px 0px 2px #2A1A1F;
 }
 
-.custom .leaflet-popup-tip {
-    background: #c8d860;
-    color: black;
-    box-shadow: 7px 7px 0px 2px #2A1A1F;
+.modal-backdrop {
+    background-color: transparent;
 }
 
 #nav {
@@ -117,12 +115,29 @@
     box-shadow: 7px 7px 0px 2px #2A1A1F;
 }
 
-#expandedSection {
+#countryInfoProtectedPlanet {
     position: relative;
     margin-top: 10px;
     margin-bottom: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
     background-color: antiquewhite;
-    box-shadow: 3px 3px 0px 1px #2A1A1F;
+    /*box-shadow: 3px 3px 0px 1px #2A1A1F;*/
+}
+
+#buttonProtectedPlanet {
+    margin-top: 10px;
+}
+
+.modal-header {
+    border-bottom: 0 none;
+    background-color: #f3f3f3;
+}
+
+.modal-body {
+    padding-top: 10px;
+}
+
+.modal-footer {
+    border-top: 0 none;
 }
