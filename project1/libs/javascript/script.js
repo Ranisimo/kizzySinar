@@ -74,6 +74,7 @@ function setView() {
 /* HANDLING MODALS AND COUNTRY BORDER GENERATION */
 
 var weather = ""; //glabal variable
+var thisFeature = "";
 
 function onEachFeature(f, l){
     var isoa3 = f.properties.iso_a3;
@@ -93,8 +94,11 @@ function onEachFeature(f, l){
                 //Popup Content
 
                 //Holds two divs, one for the REST Countries API, second for the Protected Planet API
+                var modalContent = document.createElement("div");
+                    modalContent.className = "modal-content";
+                
                 var popupCreateContainingModal = document.createElement("div");
-                    popupCreateContainingModal.className = "modal-content";
+                    popupCreateContainingModal.className = "modal-body";
 
                 var popupCreateMainDivElement = document.createElement("div");
                     popupCreateMainDivElement.className = "container-fluid";
@@ -179,7 +183,7 @@ function onEachFeature(f, l){
                             weatherMainTD.innerText = "Weather:";
                         var weatherMainResultTD = document.createElement("div");
                             weatherMainResultTD.className = "col font-weight-bold";
-                            weatherMainResultTD.innerText = updateWeather;
+                            //weatherMainResultTD.innerText = updateWeather;
                 weatherMain.appendChild(weatherMainTD);
                 weatherMain.appendChild(weatherMainResultTD);
 
@@ -209,9 +213,9 @@ function onEachFeature(f, l){
                     });
                 
                 popupCreateContainingModal.appendChild(popupCreateAdditionalInfoButton);
+                modalContent.appendChild(popupCreateContainingModal);
                 
-
-                $('#modalPopup').modal();
+                thisFeature = modalContent;
             
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -339,7 +343,7 @@ var geoJSONLayer = new L.GeoJSON.AJAX('libs/json/countryBorders.geo.json',{
     onEachFeature: onEachFeature
 }).addTo(mymap);
 
-var updateWeather = geoJSONLayer.on('click', function(e) {
+/* var updateWeather = geoJSONLayer.on('click', function(e) {
     var lat = e.latlng.lat;
     var lng = e.latlng.lng;
     
@@ -361,4 +365,9 @@ var updateWeather = geoJSONLayer.on('click', function(e) {
             console.log(jqXHR);
         }   
     });
+}); */
+
+geoJSONLayer.on('click', function(e) {
+    e = thisFeatre;
+    $('#modalPopup').modal('toggle').append(e);
 });
