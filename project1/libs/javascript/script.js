@@ -93,10 +93,9 @@ function onEachFeature(f, l){
                 document.getElementById('countryDemonym').innerText = result['demonym'] + ".";
                 document.getElementById('countryLanguages').innerText = result["languages"].map(lang => lang.name).join(", ") + ".";
                 document.getElementById('countryRegion').innerText = result["region"] + ".";
-                
-                document.getElementById('getProtectedPlanet').addEventListener('click', getProtectedPlanetAPI);
+                document.getElementById('getProtectedPlanet').setAttribute("iso", f.properties.iso_a3);
 
-                document.getElementById('countryInfoProtectedPlanet').hidden = true;
+                document.getElementById('countryInfoProtectedPlanet').style.display = "none";
 
                 $('#modalPopup').modal('show');
 
@@ -105,35 +104,36 @@ function onEachFeature(f, l){
                 console.log(jqXHR);
             }
         });
-
-        var getProtectedPlanetAPI = function() {
-        $.ajax({
-            url: "libs/php/getProtectedPlanet.php",
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                iso: isoa3
-            },
-            success: function(result) {
-
-                document.getElementById('countryInfoProtectedPlanet').hidden = false;
-
-                document.getElementById('countryLandArea').innerText = result['landarea'].toLocaleString("en-US") + " km2";
-                document.getElementById('countryMarineArea').innerText = result['marinearea'].toLocaleString("en-US") + " km2";
-                document.getElementById('countryProtectedLandArea').innerText = result['palandarea'].toLocaleString("en-US") + " km2";
-                document.getElementById('countryProtectedMarineArea').innerText = result['pamarinearea'].toLocaleString("en-US") + " km2";
-                document.getElementById('countryPercentageofLandProtected').innerText = result['percentpalandarea'].toLocaleString("en-US") + " %";
-                document.getElementById('countryPercentageofMarineProtected').innerText = result['percentpamarinearea'].toLocaleString("en-US") + " %";
-                
-    
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
-            }
-        });
-        }; 
     });
 };
+
+document.getElementById('getProtectedPlanet').addEventListener('click', getProtectedPlanetAPI);
+
+function getProtectedPlanetAPI() {
+    var isoa3 = document.getElementById('getProtectedPlanet').getAttribute('iso');
+    $.ajax({
+        url: "libs/php/getProtectedPlanet.php",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            iso: isoa3
+        },
+        success: function(result) {
+            
+            document.getElementById('countryLandArea').innerText = result['landarea'].toLocaleString("en-US") + " km2";
+            document.getElementById('countryMarineArea').innerText = result['marinearea'].toLocaleString("en-US") + " km2";
+            document.getElementById('countryProtectedLandArea').innerText = result['palandarea'].toLocaleString("en-US") + " km2";
+            document.getElementById('countryProtectedMarineArea').innerText = result['pamarinearea'].toLocaleString("en-US") + " km2";
+            document.getElementById('countryPercentageofLandProtected').innerText = result['percentpalandarea'].toLocaleString("en-US") + " %";
+            document.getElementById('countryPercentageofMarineProtected').innerText = result['percentpamarinearea'].toLocaleString("en-US") + " %";
+
+            document.getElementById('countryInfoProtectedPlanet').style.display = "block";
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+}; 
 
 var myStyle = {
     "color": "#36454f",
