@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gazetteer</title>
 
-    <!--Bootstrap Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!--Bootstrap Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    
     <!--My Stylesheet-->
     <link rel="stylesheet" href="libs\css\styles.css"/>
 
     <!--Leaflet's Stylesheet and Script-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="libs\javascript\libraries\leaflet.ajax.min.js"></script>
+    <script src="vendors\js\leaflet.ajax.min.js"></script>
   </head>
 
   <body>
@@ -28,20 +32,98 @@
         <select autocomplete="on" id="countrySelect" name="countrySelect" onChange="setView()"=></select>
       </div>
     </div>
-    
-    <div class="modal" tabindex="-1">
-      <div id="modalPopup" class="modal-dialog"></div>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" hidden="true"></button>
+
+    <div id="modalPopup" class="modal" tabindex="-1">
+
+      <div class="modal-dialog modal-dialog-centered">
+        <div class='modal-content custom'>
+          
+          <div class="modal-header">
+            <h3 class='display-6' id='countryName'></h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class='modal-body'>
+
+            <div class='container flex' id="countryInfoMain">
+              <div class='row'>
+                <div class='col fw-bold'>Capital:</div>
+                <div class='col' id='countryCapital'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Population:</div>
+                <div class='col' id='countryPopulation'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Demonym:</div>
+                <div class='col' id='countryDemonym'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Language:</div>
+                <div class='col' id='countryLanguages'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Region:</div>
+                <div class='col' id='countryRegion'></div>
+              </div>
+            </div>
+            <div id="buttonProtectedPlanet" class="d-grid gap-2">
+              <button id="getProtectedPlanet" class="btn btn-outline-light">Protected Planet</button>
+            </div> 
+            
+            <div class='container flex ' id="countryInfoProtectedPlanet">
+              <div class='row'>
+                <div class='col fw-bold'>Land Area:</div>
+                <div class='col' id='countryLandArea'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Marine Area:</div>
+                <div class='col' id='countryMarineArea'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Protected Land Area:</div>
+                <div class='col' id='countryProtectedLandArea'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Protected Marine Area:</div>
+                <div class='col' id='countryProtectedMarineArea'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Percentage of Land Protected:</div>
+                <div class='col' id='countryPercentageofLandProtected'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Percentage of Marine Protected:</div>
+                <div class='col' id='countryPercentageofMarineProtected'></div>
+              </div>
+            </div> 
+
+          </div>
+
+          <div class="modal-footer">
+            
+          </div>
+
+        </div>  
+        
+      </div>
     </div>
     
 
     <!--Map-->
     <div id="mapid"></div>
 
-    <!--Scripts-->
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <!--My Scripts-->
     <script src="libs\javascript\script.js"></script>
   </body>
