@@ -147,16 +147,116 @@ var geoJSONLayer = new L.GeoJSON.AJAX('vendors/json/countryBorders.geo.json',{
     onEachFeature: onEachFeature
 }).addTo(mymap);
 
-function markerModal(f,l) {
+
+//CREATING CITY MARKERS
+function shipModal(f,l) {
+
+    var cityMarker = L.AwesomeMarkers.icon({
+        icon: 'ship',
+        prefix: 'fa',
+        markerColor: 'blue'
+    });
+
+    l.setIcon(cityMarker);
+
     l.on('click', function() {
-        document.getElementById('featureName').innerText = f.properties.NAME;
-            $('#modalMarker').modal('show');
+        document.getElementById('featureName').innerText = f.properties.name;
+        $('#modalMarker').modal('show');
     })
 };
 
-var markersLayer = new L.GeoJSON.AJAX('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places.geojson',{
-    onEachFeature: markerModal
-}).addTo(mymap); 
+$.getJSON('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_ports.geojson', function(data) {
+    processportJSON(data);
+});  
+
+var clusterMarkers = L.markerClusterGroup({
+    showCoverageOnHover: false,
+});
+
+function processportJSON(data) {
+    // Turn JSON object into geojson object
+    var portMarkers = L.geoJson(data, {
+        onEachFeature: shipModal
+    });
+    portMarkers.addTo(clusterMarkers);
+}
+
+function airportModal(f,l) {
+
+    var cityMarker = L.AwesomeMarkers.icon({
+        icon: 'plane',
+        prefix: 'fa',
+        markerColor: 'yellow'
+    });
+
+    l.setIcon(cityMarker);
+
+    l.on('click', function() {
+        document.getElementById('featureName').innerText = f.properties.name;
+        $('#modalMarker').modal('show');
+    })
+};
+
+$.getJSON('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_airports.geojson', function(data) {
+    processairportJSON(data);
+});  
+
+function processairportJSON(data) {
+    // Turn JSON object into geojson object
+    var airportMarkers = L.geoJson(data, {
+        onEachFeature: airportModal
+    });
+    airportMarkers.addTo(clusterMarkers);
+};
+
+function citiesModal(f,l) {
+
+    var cityMarker = L.AwesomeMarkers.icon({
+        icon: 'city',
+        prefix: 'fa',
+        markerColor: 'gray'
+    });
+
+    l.setIcon(cityMarker);
+
+    l.on('click', function(e) {
+        document.getElementById('featureName').innerText = f.properties.name;
+        var lat = e.latlng.lat;
+        var lng = e.latlng.lng;
+        $.ajax({
+            url: "libs/php/getWeatherData.php",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                lat: lat,
+                lng: lng
+            },
+            success: function(result) {
+                    
+                    document.getElementById('cityWeather').innerText = result['weather'][0]['main'];
+    
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }   
+        });
+        $('#modalMarker').modal('show');
+    })
+};
+
+$.getJSON('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places_simple.geojson', function(data) {
+    processCitiesJSON(data);
+}); 
+
+function processCitiesJSON(data) {
+    // Turn JSON object into geojson object
+    var citiesMarkers = L.geoJson(data, {
+        onEachFeature: citiesModal
+    });
+    citiesMarkers.addTo(clusterMarkers);
+};
+
+mymap.addLayer(clusterMarkers);
 
 /* var updateWeather = geoJSONLayer.on('click', function(e) {
     var lat = e.latlng.lat;
