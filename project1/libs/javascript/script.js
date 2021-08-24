@@ -159,8 +159,10 @@ function shipModal(f,l) {
 
     l.setIcon(cityMarker);
 
-    l.on('click', function() {
+    l.on('click', function(e) {
+        getWeather(e);
         document.getElementById('featureName').innerText = f.properties.name;
+        document.getElementById('featureType').innerText = "Port.";
         $('#modalMarker').modal('show');
     })
 };
@@ -191,8 +193,10 @@ function airportModal(f,l) {
 
     l.setIcon(cityMarker);
 
-    l.on('click', function() {
+    l.on('click', function(e) {
+        getWeather(e);
         document.getElementById('featureName').innerText = f.properties.name;
+        document.getElementById('featureType').innerText = "Airport.";
         $('#modalMarker').modal('show');
     })
 };
@@ -220,7 +224,14 @@ function citiesModal(f,l) {
     l.setIcon(cityMarker);
 
     l.on('click', function(e) {
+        getWeather(e);
         document.getElementById('featureName').innerText = f.properties.name;
+        document.getElementById('featureType').innerText = "City.";
+        $('#modalMarker').modal('show');
+    })
+};
+
+var getWeather = function(e) {
         var lat = e.latlng.lat;
         var lng = e.latlng.lng;
         $.ajax({
@@ -233,15 +244,14 @@ function citiesModal(f,l) {
             },
             success: function(result) {
                     
-                    document.getElementById('cityWeather').innerText = result['weather'][0]['main'];
+                    document.getElementById('cityWeather').innerText = result['weather'][0]['main'] + ", " + result['weather'][0]['description'];
+                    console.log(result);
     
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR);
             }   
         });
-        $('#modalMarker').modal('show');
-    })
 };
 
 $.getJSON('https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_populated_places_simple.geojson', function(data) {
@@ -257,27 +267,3 @@ function processCitiesJSON(data) {
 };
 
 mymap.addLayer(clusterMarkers);
-
-/* var updateWeather = geoJSONLayer.on('click', function(e) {
-    var lat = e.latlng.lat;
-    var lng = e.latlng.lng;
-    
-    $.ajax({
-        url: "libs/php/getWeatherData.php",
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            lat: lat,
-            lng: lng
-        },
-        success: function(result) {
-                
-                weather = result['weather'];
-                console.log(weather);   
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-        }   
-    });
-}); */

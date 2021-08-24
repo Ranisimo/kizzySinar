@@ -26,8 +26,6 @@
         if( parse_url( $url,PHP_URL_SCHEME )=='https' ){
             curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, true );
             curl_setopt( $curl, CURLOPT_SSL_VERIFYHOST, 2 );
-            curl_setopt( $curl, CURLOPT_CAINFO, $cacert );
-            curl_setopt( $curl, CURLOPT_CAPATH, $cacert );
         }
 
         /* Define standard options */
