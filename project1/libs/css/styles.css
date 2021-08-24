@@ -141,3 +141,7 @@
 .modal-footer {
     border-top: 0 none;
 }
+
+.custom-header {
+    padding-bottom: 5px;
+}
