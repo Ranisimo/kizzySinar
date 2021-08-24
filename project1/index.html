@@ -15,10 +15,23 @@
     <!--My Stylesheet-->
     <link rel="stylesheet" href="libs\css\styles.css"/>
 
-    <!--Leaflet's Stylesheet and Script-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <script src="https://kit.fontawesome.com/f0ec9e3182.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+    <!--Leaflet's Script-->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="vendors\js\leaflet.ajax.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    
+    <!--Marker Clusters-->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+
+    <!--Awesome Markers-->
+    <link rel="stylesheet" href="vendors\css\leaflet.awesome-markers.css">
+    <script src="vendors\js\leaflet.awesome-markers.js"></script>
+    
   </head>
 
   <body>
@@ -29,7 +42,7 @@
     <div class="mainContainer">
       <div id="nav">
         <label for="countrySelect">View Country:</label>
-        <select autocomplete="on" id="countrySelect" name="countrySelect" onChange="setView()"=></select>
+        <select autocomplete="on" id="countrySelect" name="countrySelect" onChange="setView()"></select>
       </div>
     </div>
 
@@ -122,12 +135,18 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class='modal-content custom'>
           
-          <div class="modal-header">
-            <h3 class='display-6' id='featureName'></h3>
+          <div class="modal-header custom-header">
+            <h3 class='lead' id='featureName'></h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
           <div class='modal-body'>
+            <div class='container flex' id="cityInfoMain">
+              <div class='row'>
+                <div class='col fw-bold'>Weather:</div>
+                <div class='col' id='cityWeather'></div>
+              </div>
+            </div>
           </div>
 
           <div class="'modal-footer">
