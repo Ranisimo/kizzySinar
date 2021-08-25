@@ -10,6 +10,7 @@
     if( $res->info->http_code==200 ){
         $json=json_decode( $res->response );
         $output=array(
+            'name'  => $json->name,
             'capital'    =>  $json->capital,
 			'population'	=> $json->population,
 			'region'	=> $json->region,
