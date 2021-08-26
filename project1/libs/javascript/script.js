@@ -16,6 +16,7 @@ var mymap = new L.map('mapid', { zoomControl: false }).locate({setView: true, ma
 
 
 /* HANDLING THE SEARCH QUERY */
+var parentCoordinates = [];
 
 //Populating <select>
 $(document).ready(function() {
@@ -41,36 +42,51 @@ $(document).ready(function() {
                 return (at > bt) ? 1 : ((at < bt) ? -1 : 0);
             })
         );
-    }
+    };
+    $('#countrySelect').change(function() {
+        var isoa3 = $('#countrySelect option:selected').val();
+        $.ajax({
+            url: "libs/php/getCountryBorders.php",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                iso: isoa3
+            },
+            success: function(result) {
+
+                if (result.status.name == "ok") {
+
+                    var geoJSONFeature = result['data'];
+                    var GeoJSONLayer = new L.GeoJSON(geoJSONFeature, {
+                        style: myStyle,
+                        onEachFeature: onEachFeature
+                    }).addTo(mymap);
+
+
+                }
+        
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+    })
 });
 
 
 //Setting mymap.setView to <option> selected
-function getBorder() {
-    optionIso = $('#countrySelect option:selected').val();
-    $.ajax({
-        url: "libs/php/getCountryBorders.php",
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            iso: optionIso
-        },
-        success: function(result) {
-
-            if (result.status.name == "ok") {
-
-                console.log(result['data']);
-
-            }
-      
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-            console.log(optionIso);
-        }
+function onEachFeature(f, l){
+    var isoa3 = $('#countrySelect option:selected').val();
+    l.on('click', function() {
+        modalGeneration(isoa3);
     });
+};
+
+var myStyle = {
+    "color": "#36454f",
+    "weight": 2,
+    "opacity": 0.5,
+    "fillOpacity": 0
 };
 
 
@@ -132,18 +148,6 @@ function getProtectedPlanetAPI() {
         }
     });
 }; 
-
-var myStyle = {
-    "color": "#36454f",
-    "weight": 2,
-    "opacity": 0,
-    "fillOpacity": 0
-};
-
-var geoJSONLayer = new L.GeoJSON.AJAX('vendors/json/countryBorders.geo.json',{
-    style: myStyle, 
-    onEachFeature: onEachFeature
-}).addTo(mymap);
 
 
 //CREATING CITY MARKERS
@@ -268,13 +272,6 @@ function processCitiesJSON(data) {
         onEachFeature: citiesModal
     });
     citiesMarkers.addTo(clusterMarkers);
-};
-
-function onEachFeature(f, l){
-    var isoa3 = f.properties.iso_a3;
-    l.on('click', function() {
-        modalGeneration(isoa3);
-    });
 };
 
 mymap.addLayer(clusterMarkers);
