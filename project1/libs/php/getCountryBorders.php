@@ -9,19 +9,15 @@
 
     foreach ($json->features->properties as $object) {
         if ($object->iso_a3 == $_REQUEST['iso']) {
-            $output=array(
-                'border'    => $object->coordinates,
-                'status'    =>  array(
-                    'code'          =>  200,
-                    'name'          =>  'ok',
-                    'description'   =>  'success',
-                    'returnedIn'    =>  intval( ( microtime( true ) - $start ) * 1000 ) . 'ms'   
-                ),
-            ); 
+            $output['status']['code'] = "200";
+            $output['status']['name'] = "ok";
+            $output['status']['description'] = "success";
+            $output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
+            $output['data'] = $decode['coordinates'];
         } else {
             $output=$json;
         }
-    }
+    };
 
     header('Content-Type: application/json; charset=UTF-8');
     echo json_encode($output); 

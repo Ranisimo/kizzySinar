@@ -59,7 +59,7 @@ function getBorder() {
 
             if (result.status.name == "ok") {
 
-                console.log(result['border']);
+                console.log(result['data']);
 
             }
       
