@@ -62,6 +62,8 @@ $(document).ready(function() {
                         onEachFeature: onEachFeature
                     }).addTo(mymap);
 
+                    setView(isoa3);
+
 
                 }
         
@@ -75,10 +77,35 @@ $(document).ready(function() {
 
 
 //Setting mymap.setView to <option> selected
+function setView(isoa3){
+    $.ajax({
+        url: "libs/php/locateCountry.php",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            iso: isoa3
+        },
+        success: function(result) {
+
+            if (result.status.name == "ok") {
+
+                mymap.setView(result['coordinates'])
+
+
+            }
+    
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }
+    });
+};
+
 function onEachFeature(f, l){
     var isoa3 = $('#countrySelect option:selected').val();
     l.on('click', function() {
         modalGeneration(isoa3);
+        mymap.setView(f.latlngs);
     });
 };
 
