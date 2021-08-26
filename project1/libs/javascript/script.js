@@ -105,7 +105,6 @@ function onEachFeature(f, l){
     var isoa3 = $('#countrySelect option:selected').val();
     l.on('click', function() {
         modalGeneration(isoa3);
-        mymap.setView(f.latlngs);
     });
 };
 
