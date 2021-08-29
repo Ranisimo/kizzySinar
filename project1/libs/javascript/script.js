@@ -77,7 +77,7 @@ var countryInformation = L.easyButton({
     position: 'bottomright',
     states: [{
         stateName: 'open-country-modal',
-        icon: 'fa-globe',
+        icon: 'fa-globe-americas fa-5x',
         title: 'Open Country Information',
         onClick: function onEachFeature(f, l){
                 var isoa2 = $('#countrySelect option:selected').val();
@@ -85,6 +85,9 @@ var countryInformation = L.easyButton({
         }
     }]
 });
+
+countryInformation.button.style.width = '70px';
+countryInformation.button.style.height = '62px';
 
 var clusterMarkers = L.markerClusterGroup({
     showCoverageOnHover: false,
