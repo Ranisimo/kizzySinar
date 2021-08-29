@@ -1,7 +1,4 @@
-<?php
-
-	require 'certificate.php';
-    
+<?php    
 	ini_set('display_errors', 'On');
 	error_reporting(E_ALL);
 
@@ -29,5 +26,4 @@
 	header('Content-Type: application/json; charset=UTF-8');
 
 	echo json_encode($output); 
-
 ?>

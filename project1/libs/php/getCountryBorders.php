@@ -11,7 +11,7 @@
 
     $output = [];
     foreach ($json["features"] as $object) {
-        if ($object["properties"]["iso_a3"] == $_REQUEST['iso']) {
+        if ($object["properties"]["iso_a2"] == $_REQUEST['iso']) {
             $output['status']['code'] = "200";
             $output['status']['name'] = "ok";
             $output['status']['description'] = "success";

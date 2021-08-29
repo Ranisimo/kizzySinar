@@ -16,6 +16,7 @@
 			'region'	=> $json->region,
 			'demonym'	=> $json->demonym,
 			'languages'	=> $json->languages,
+            'isoa3' => $json->alpha3Code,
             'status'    =>  array(
                 'code'          =>  200,
                 'name'          =>  'ok',
