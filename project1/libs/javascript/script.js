@@ -284,8 +284,8 @@ var getWikiInfo = function(e) {
         },
         success: function(result) {
             
-            document.getElementById("countryCapitalWiki").innerText = result['data'][0]['wikipediaUrl'];
-            document.getElementById('cityWiki').innerText = result['data'][0]['wikipediaUrl'];
+            document.getElementById("countryCapitalWikiLink").href = result['data'][0]['wikipediaUrl'];
+            document.getElementById('cityWikiLink').href = result['data'][0]['wikipediaUrl'];
             document.getElementById('citySummary').innerText = result['data'][0]['summary'];
 
         },
