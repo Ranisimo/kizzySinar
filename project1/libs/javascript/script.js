@@ -23,10 +23,10 @@ $(document).ready(function() {
         type: 'POST',
         dataType: 'json',
         success: function(result) {
-            result['data'].features.forEach(function (feature) {
+            result['data'].forEach(function (feature) {
                 $("<option>", {
-                    value: feature.properties.iso_a2,
-                    text: feature.properties.name
+                    value: feature.iso_a2,
+                    text: feature.name
                 }).appendTo("#countrySelect");
             });
             sortSelectOptions();
@@ -174,6 +174,8 @@ var modalGeneration = function(isoa2){
         },
         success: function(result) {
 
+            e = result['name'];
+
             //Modal Content
             document.getElementById('countryName').innerText = result['name'];
             document.getElementById("countryCapital").innerText = result['capital'] + ".";
@@ -181,7 +183,12 @@ var modalGeneration = function(isoa2){
             document.getElementById('countryDemonym').innerText = result['demonym'] + ".";
             document.getElementById('countryLanguages').innerText = result["languages"].map(lang => lang.name).join(", ") + ".";
             document.getElementById('countryRegion').innerText = result["region"] + ".";
+            document.getElementById('countryCurrency').innerText = result["currency"][0]["symbol"] + " " + result["currency"][0]["code"] + ", " + result["currency"][0]["name"] + ".";
+
+            getWeather(e);
+
             document.getElementById('getProtectedPlanet').setAttribute("iso", result["isoa3"]);
+
 
             document.getElementById('countryInfoProtectedPlanet').style.display = "none";
 
@@ -225,7 +232,6 @@ function getProtectedPlanetAPI() {
 
 //CREATING MARKERS
 function citiesModal(f,l) {
-
     var cityMarker = L.AwesomeMarkers.icon({
         icon: 'city',
         prefix: 'fa',
@@ -235,27 +241,27 @@ function citiesModal(f,l) {
     l.setIcon(cityMarker);
 
     l.on('click', function(e) {
-        getWeather(e);
+        var e = f.properties.name;
         document.getElementById('featureName').innerText = f.properties.name;
         document.getElementById('featureType').innerText = "City.";
+        getWeather(e);
+        getWikiInfo(e);
         $('#modalMarker').modal('show');
     })
 };
 
 var getWeather = function(e) {
-    var lat = e.latlng.lat;
-    var lng = e.latlng.lng;
     $.ajax({
         url: "libs/php/getWeatherData.php",
         type: 'POST',
         dataType: 'json',
         data: {
-            lat: lat,
-            lng: lng
+            q: e
         },
         success: function(result) {
                 
-                document.getElementById('cityWeather').innerText = result['weather'][0]['main'] + ", " + result['weather'][0]['description'];
+            document.getElementById('countryWeather').innerText = result['weather'][0]['main'] + ", " + result['weather'][0]['description'];
+            document.getElementById('cityWeather').innerText = result['weather'][0]['main'] + ", " + result['weather'][0]['description'];
 
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -263,3 +269,23 @@ var getWeather = function(e) {
         }   
     });
 };
+
+var getWikiInfo = function(e) {
+    $.ajax({
+        url: "libs/php/getWikiInfo.php",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            q: e
+        },
+        success: function(result) {
+                
+            document.getElementById('cityWiki').innerText = result['data'][0]['wikipediaUrl'];
+            document.getElementById('citySummary').innerText = result['data'][0]['summary'];
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+        }   
+    });
+}
