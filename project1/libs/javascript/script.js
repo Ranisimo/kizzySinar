@@ -175,10 +175,14 @@ var modalGeneration = function(isoa2){
         success: function(result) {
 
             e = result['name'];
+            capital = result['capital'];
 
             //Modal Content
             document.getElementById('countryName').innerText = result['name'];
             document.getElementById("countryCapital").innerText = result['capital'] + ".";
+
+            getWikiInfo(capital);
+
             document.getElementById('countryPopulation').innerText = result['population'].toLocaleString("en-US") + " people.";
             document.getElementById('countryDemonym').innerText = result['demonym'] + ".";
             document.getElementById('countryLanguages').innerText = result["languages"].map(lang => lang.name).join(", ") + ".";
@@ -279,7 +283,8 @@ var getWikiInfo = function(e) {
             q: e
         },
         success: function(result) {
-                
+            
+            document.getElementById("countryCapitalWiki").innerText = result['data'][0]['wikipediaUrl'];
             document.getElementById('cityWiki').innerText = result['data'][0]['wikipediaUrl'];
             document.getElementById('citySummary').innerText = result['data'][0]['summary'];
 
