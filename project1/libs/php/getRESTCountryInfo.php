@@ -17,6 +17,7 @@
 			'demonym'	=> $json->demonym,
 			'languages'	=> $json->languages,
             'isoa3' => $json->alpha3Code,
+            'currency'    =>$json->currencies,
             'status'    =>  array(
                 'code'          =>  200,
                 'name'          =>  'ok',

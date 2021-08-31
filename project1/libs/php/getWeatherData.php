@@ -3,7 +3,7 @@
     require 'certificate.php';
     
 	$start=microtime( true );
-    $url=sprintf( 'http://api.openweathermap.org/data/2.5/weather?lat='. $_REQUEST['lat'] . '&lon=' . $_REQUEST['lng'] . '&appid=dcb88380291aa038398ccaeceb1300a9');
+    $url=sprintf( 'http://api.openweathermap.org/data/2.5/weather?q='. $_REQUEST['q'] . '&appid=dcb88380291aa038398ccaeceb1300a9');
     $res=curl( $url );
     
     if( $res->info->http_code==200 ){
