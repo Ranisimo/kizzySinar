@@ -98,11 +98,6 @@
                 <div class='col' id='countryCurrency'></div>
               </div>
 
-              <div class='row'>
-                <div class='col fw-bold'>Regional Weather:</div>
-                <div class='col' id='countryWeather'></div>
-              </div>
-
             </div>
             <div id="buttonProtectedPlanet" class="d-grid gap-2">
               <button id="getProtectedPlanet" class="btn btn-outline-light" iso="">Protected Planet</button>
@@ -169,11 +164,6 @@
               </div>
 
               <div class='row'>
-                <div class='col fw-bold'>Weather:</div>
-                <div class='col' id='cityWeather'></div>
-              </div>
-
-              <div class='row'>
                 <div class='col fw-bold'>Links:</div>
                 <div class='col' id='cityWiki'><a href="" id="cityWikiLink">To Wikipedia</a></div>
               </div>
@@ -184,6 +174,192 @@
 
               <div class='row'>
                 <div class='col' id='citySummary'></div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="'modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--   ---------------------------------------------------   -->
+    <div id="modalWeather" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class='modal-content custom'>
+          
+          <div class="modal-header custom-header">
+            <h3 class='lead' id='weatherPlaceName'></h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class='modal-body'>
+            <table class='table table-striped'>
+              <tbody>
+                <tr class='table-primary'>
+                  <th>Current Weather:</th>
+                  <td id='currentWeather'></td>
+                </tr>
+                <tr class='table-info'>
+                  <th>Current Temperature:</th>
+                  <td id='weatherTemperature'></td>
+                </tr>
+                <tr>
+                  <th>Feels Like:</th>
+                  <td id='weatherFeelsLike'></td>
+                </tr>
+                <tr>
+                  <th>Lowest Temps:</th>
+                  <td id='weatherLowTemperature'></td>
+                </tr>
+                <tr>
+                  <th>Highest Temps:</th>
+                  <td id='weatherHighTemperature'></td>
+                </tr>
+                <tr>
+                  <th>Humidity:</th>
+                  <td id='weatherHumidity'></td>
+                </tr>
+                <tr>
+                  <th>Wind Speed:</th>
+                  <td id='weatherWindSpeed'></td>
+                </tr>
+                <tr>
+                  <th>Wind Gust:</th>
+                  <td id='weatherWindGust'></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class='row'>
+              <div class='col fw-bold' align="center">Sunrise</div>
+              <div class='col fw-bold' align="center">Sunset</div>
+            </div>
+            <div class='row'>
+              <div class='col' align="center" id='weatherSunRise'>Not Available</div>
+              <div class='col' align="center" id='weatherSunSet'>Not Available</div>
+            </div>
+            <div class='row'>
+              <div class='col' align="center"><i class="far fa-sun fa-2x"></i></div>
+              <div class='col' align="center"><i class="far fa-moon fa-2x"></i></div>
+            </div>
+          </div>
+
+          <div class="'modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalHoliday" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class='modal-content custom'>
+          
+          <div class="modal-header custom-header">
+            <h3 class='lead' id='holidayTitle'></h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class='modal-body'>
+            <table class='table table-striped' id='holidayTable'>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Day</th>
+                  <th>Date</th>
+                  <th>Public?</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="'modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalWebcam" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class='modal-content custom'>
+          
+          <div class="modal-header custom-header">
+            <h3 class='lead' id='webcamName'></h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class='modal-body'>
+            <div class='container flex' id="cityInfoMain">
+
+              <div class='row'>
+                <div class='col fw-bold'>Feature:</div>
+                <div class='col' id='webcamNote'>Webcam</div>
+              </div>
+
+              <div class='row'>
+                <iframe controls id='webcamViewport'>
+                </iframe>
+              </div>
+            </div>
+          </div>
+
+          <div class="'modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalCOVID" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class='modal-content custom'>
+          
+          <div class="modal-header custom-header">
+            <h3 class='lead' id='countryCOVIDName'></h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class='modal-body'>
+            <div class='container flex' id="cityInfoMain">
+
+              <div class='row'>
+                <div class='col fw-bold'>Daily Confirmed:</div>
+                <div class='col' id='COVIDDailyConfirmed'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Daily Deaths:</div>
+                <div class='col' id='COVIDDailyDeaths'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Active Cases:</div>
+                <div class='col' id='COVIDActive'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Total in Critical Condition:</div>
+                <div class='col' id='COVIDCritical'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Total Cases:</div>
+                <div class='col' id='COVIDTotalCases'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Total Deaths:</div>
+                <div class='col' id='COVIDTotalDeaths'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Total Recovered:</div>
+                <div class='col' id='COVIDTotalRecovered'></div>
+              </div>
+
+              <div class='row'>
+                <div class='col fw-bold'>Updated:</div>
+                <div class='col' id='COVIDLastUpdated'></div>
               </div>
 
             </div>
