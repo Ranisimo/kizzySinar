@@ -102,9 +102,9 @@ var weatherInformation = L.easyButton({
 var holidayInformation = L.easyButton({
     position: 'bottomright',
     states: [{
-        stateName: 'open-weather-modal',
+        stateName: 'open-holiday-modal',
         icon: 'fa-calendar-day fa-2x',
-        title: 'Open Weather Information',
+        title: 'Open Holiday Information',
         onClick: function onEachFeature(f, l) {
             var isoa2 = $('#countrySelect option:selected').val(); 
             holidayModal(isoa2);
@@ -115,9 +115,9 @@ var holidayInformation = L.easyButton({
 var COVIDInformation = L.easyButton({
     position: 'bottomright',
     states: [{
-        stateName: 'open-weather-modal',
+        stateName: 'open-covid-modal',
         icon: 'fa-virus fa-2x',
-        title: 'Open Weather Information',
+        title: 'Open COVID Information',
         onClick: function onEachFeature(f, l) {
             var isoa2 = $('#countrySelect option:selected').val(); 
             covidModal(isoa2);
