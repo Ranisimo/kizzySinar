@@ -145,3 +145,12 @@
 .custom-header {
     padding-bottom: 5px;
 }
+
+.easyButtonCustom {
+    display: block;
+    align-content: center;
+    align-self: center;
+    justify-content: center;
+    height: 50px;
+    background-color: #008744;
+}
