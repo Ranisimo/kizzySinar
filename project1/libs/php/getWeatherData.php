@@ -3,13 +3,16 @@
     require 'certificate.php';
     
 	$start=microtime( true );
-    $url=sprintf( 'http://api.openweathermap.org/data/2.5/weather?q='. $_REQUEST['q'] . '&appid=dcb88380291aa038398ccaeceb1300a9');
+    $url=sprintf( 'http://api.openweathermap.org/data/2.5/weather?q='. $_REQUEST['q'] . '&units=metric&appid=dcb88380291aa038398ccaeceb1300a9');
     $res=curl( $url );
     
     if( $res->info->http_code==200 ){
         $json=json_decode( $res->response );
         $output=array(
             'weather'    =>  $json->weather,
+            'temps'  => $json->main,
+            'wind'  => $json->wind,
+            'sys'   => $json->sys,
             'status'    =>  array(
                 'code'          =>  200,
                 'name'          =>  'ok',
