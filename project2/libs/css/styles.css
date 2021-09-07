@@ -1,0 +1,44 @@
+body {
+    background-color: antiquewhite;
+}
+
+header {
+    text-align: center;
+}
+
+#mainBody {
+    background-color: cornflowerblue;
+    max-width: 70vh;
+    height: 100vh;
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+#searchBar {
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: space-between;
+}
+
+#searchAndGo {
+    flex: 1;
+}
+
+#advancedDropDown {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 480px) {
+    #mainBody {
+        background-color: cornflowerblue;
+        max-width: 100%;
+        height: 100vh;
+        position: relative;
+        display: block;
+        margin: auto;
+    }
+}
