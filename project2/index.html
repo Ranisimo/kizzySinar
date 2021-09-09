@@ -8,42 +8,95 @@
         <meta name="author" content="Kizzy Sinar">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!--Bootstrap Latest compiled and minified CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
         <link rel="stylesheet" href="libs/css/styles.css" type="text/css">
     </head>
 
 
     <body>
-        <div id="mainBody">
-            <header>
-                <h1>Company name</h1>
-            </header>
+        <div>
 
-            <main>
+            <div class="container" id="mainBody">
 
-                <div id="searchBar">
+                <div id="header">
+                    <h1>Company Directory</h1>
+                </div>
+
+                <div class="container" id="searchBarContainer">
+
                     <div id="searchAndGo">
-                        <input type="text" id="search" value="Search">
-                        <button>GO</button>
+                        <input type="text" id="searchQuery" size="20" placeholder="Search Names">
+
+                        <select id="locations">
+                            <option disabled selected value="all" id="placeholderLocation">Select by Location</option>
+                            <option value="all">All Locations</option>
+                        </select>
+                        <select id="departments">
+                            <option disabled selected value="all" id="placeholderDepartment">Select from Departments</option>
+                            <option value="all">All Departments</option>
+                        </select>
+                        <button id="startSearch" onclick="startSearch()">GO</button>
+                        <button onclick="getAll()">Reset</button>
                     </div>
-                    <a id="dropDown">Advanced Search ▼</a>
+    
+                    <p id="triggerDropDown" onclick="openDropDown()">Advanced Search ▼</p>
+    
                 </div>
 
-                <div id="advancedDropDown">
-                    <form>
-                        <input type="radio" value="any" name="name" checked>
-                        <label for="any">Any</label>
-                        <input type="radio" value="forename" name="name">
-                        <label for="forename">Forename</label>
-                        <input type="radio" value="surname" name="name">
-                        <label for="surname">Surname</label> 
-                    </form>
+                <div>
+
+                    <div id="dropDownContainer">
+                        <div id="dropDownContent">
+                            <div id="radioSelect">
+                                <p>Search by:</p>
+                                <form>
+
+                                    <input id="any" type="radio" value="any" name="name" checked>
+                                    <label for="any">Any</label>
+                                    <input id="forename" type="radio" value="forename" name="name">
+                                    <label for="forename">Forename</label>
+                                    <input id="surname" type="radio" value="surname" name="name">
+                                    <label for="surname">Surname</label> 
+
+                                </form>
+                            </div>
+                            
+
+                            <p onclick="closeDropDown()">Hide</p>
+                        </div>
+                        
+
+                    </div>
+                    
+
                 </div>
-                
 
-            </main>
-        </div>
+                <div class="container">
 
+                    <table class='table table-striped' id="companyDirectory">
+                        <thead>
+                            <tr>
+                            <th>Forename</th>
+                            <th>Surname</th>
+                            <th>Location</th>
+                            <th>Department</th>
+                            <th>Edit</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+                </div>
+
+            </div>
+       </div>
         <script type="text/javascript" src="libs/js/script.js"></script>
+
     </body>
 
 
