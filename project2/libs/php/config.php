@@ -10,7 +10,7 @@
 	// database name, username and password
 
 	$cd_dbname = "companydirectory";
-	$cd_user = "companydirectory";
-	$cd_password = "companydirectory";
+	$cd_user = "root";
+	$cd_password = "";
 
 ?>
