@@ -20,55 +20,55 @@
 
 
     <body>
-        <div>
+            <div class="container custom">
+                <div class="container">
 
-            <div class="container" id="mainBody">
-
-                <div id="header">
-                    <h1>Company Directory</h1>
-                </div>
-
-                <div class="container" id="searchBarContainer">
-
-                    <div id="searchAndGo">
-                        <input type="text" id="searchQuery" size="20" placeholder="Search Names">
-
-                        <select id="locations">
-                            <option disabled selected value="all" id="placeholderLocation">Select by Location</option>
-                            <option value="all">All Locations</option>
-                        </select>
-                        <select id="departments">
-                            <option disabled selected value="all" id="placeholderDepartment">Select from Departments</option>
-                            <option value="all">All Departments</option>
-                        </select>
-                        <button id="startSearch" onclick="startSearch()">GO</button>
-                        <button onclick="getAll()">Reset</button>
+                    <div class="row">
+                        <div class="col m-auto p-3"><h1 class="text-center">Company Directory</h1></div>
                     </div>
+
+                        <div class="row p-3" id="searchAndGo">
+                            <div class="col btn-group" role="group">
+                                <input class="form-control" type="text" id="searchQuery" size="20" placeholder="Search Names">
+
+                                <select id="locations" class="_locations custom-select">
+                                    <option disabled selected value="all" id="placeholderLocation">Select by Location</option>
+                                    <option value="all">All Locations</option>
+                                </select>
+                                <select id="departments" class="_departments custom-select">
+                                    <option disabled selected value="all" id="placeholderDepartment">Select from Departments</option>
+                                    <option value="all">All Departments</option>
+                                </select>
+                            
+                                <button class="btn btn-success" id="startSearch" onclick="startSearch()">GO</button>
+                                <button class="btn btn-danger" onclick="resetAll()">Reset</button>
+                            </div> 
+                            <div class="col-md-auto text-center mx-auto"><p id="triggerDropDown" onclick="dropDownToggle()">Advanced Search ▼</p></div>
+                        </div>
+        
+            
     
-                    <p id="triggerDropDown" onclick="openDropDown()">Advanced Search ▼</p>
-    
+
                 </div>
-
-                <div>
-
+                <div class="container">
                     <div id="dropDownContainer">
                         <div id="dropDownContent">
                             <div id="radioSelect">
                                 <p>Search by:</p>
                                 <form>
-
-                                    <input id="any" type="radio" value="any" name="name" checked>
-                                    <label for="any">Any</label>
-                                    <input id="forename" type="radio" value="forename" name="name">
-                                    <label for="forename">Forename</label>
-                                    <input id="surname" type="radio" value="surname" name="name">
-                                    <label for="surname">Surname</label> 
-
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" id="any" type="radio" value="any" name="name" checked>
+                                        <label for="any">Any</label>
+                                        <input class="custom-control-input" id="forename" type="radio" value="forename" name="name">
+                                        <label for="forename">Forename</label>
+                                        <input class="custom-control-input" id="surname" type="radio" value="surname" name="name">
+                                        <label for="surname">Surname</label> 
+                                    </div>
                                 </form>
                             </div>
                             
 
-                            <p onclick="closeDropDown()">Hide</p>
+                            <p onclick="dropDownToggle()">Hide</p>
                         </div>
                         
 
@@ -77,7 +77,19 @@
 
                 </div>
 
-                <div class="container">
+                <div class="row">
+                    <div class="col btn-group"><button id="addEntry" class="btn btn-outline-success" onclick="openAddModal()">Add Personnel</button></div>
+
+                    <div class="col btn-group"><button id="addLocation" class="btn btn-outline-primary" onclick="openAddLocationModal()">Add Location</button>
+                    <button id="updateLocation" class="btn btn-outline-warning" onclick="openUpdateLocationModal()">Update Location</button>
+                    <button id="deleteLocation" class="btn btn-outline-danger" onclick="openDeleteLocationModal()">Delete Location</button></div>
+                    
+                    <div class="col btn-group"><button id="addDepartment" class="btn btn-outline-primary" onclick="openAddDepartmentModal()">Add Department</button>
+                    <button id="updateDepartment" class="btn btn-outline-warning" onclick="openUpdateDepartmentModal()">Update Department</button>
+                    <button id="deleteDepartment" class="btn btn-outline-danger" onclick="openDeleteDepartmentModal()">Delete Department</button></div>
+                </div>
+
+                <div class="row p-3">
 
                     <table class='table table-striped' id="companyDirectory">
                         <thead>
@@ -87,14 +99,338 @@
                             <th>Location</th>
                             <th>Department</th>
                             <th>Edit</th>
+                            <th>Delete</th>
                             </tr>
                         </thead>
                     </table>
 
                 </div>
 
+                
+        
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="addPersonnelModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add Personnel</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="addPersonnelForm" name="addPersonnel" action="javascript:void(0)" method="post" required>
+                            <label for="firstName">First Name:</label>
+                            <input type="text" name="firstName" id="entryFirstName" size="20" value="" placeholder="First Name" required><br>
+                            <br>
+                            <label for="lastName">Second Name:</label>
+                            <input type="text" name="lastName" id="entryLastName" size="20" value="" placeholder="Last Name" required><br>
+                            <br>
+                            <label for="email">Email:</label>
+                            <input type="email" name="email" id="entryEmail" size="30" value="" required><br>
+                            <br>
+                            <select class="_departments" name="departmentID" required>
+                                <option disabled selected value="all" name="entryDepartment" id="entryDepartment">Select a Department</option>
+                            </select><br>
+                            <br>
+                            <input id="addPersonnelSubmit" type="submit" name="submit" value="Submit"><br>
+                        </form>
+                        <br>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Personnel Added.
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-success" id="submitted">User Submitted</p>
+                </div>
+              </div>
             </div>
-       </div>
+          </div>
+
+          <div class="modal" tabindex="-1" role="dialog" id="editPersonnelModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Edit Personnel</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="editPersonnelForm" name="editPersonnel" action="javascript:void(0)" method="post" required>
+                            <label for="editFirstName">First Name:</label>
+                            <input type="text" name="editFirstName" id="editFirstName" size="20" value="" placeholder="First Name" required><br>
+                            <br>
+                            <label for="editLastName">Second Name:</label>
+                            <input type="text" name="editLastName" id="editLastName" size="20" value="" placeholder="Last Name" required><br>
+                            <br>
+                            <label for="editEmail">Email:</label>
+                            <input type="email" name="editEmail" id="editEmail" size="30" value="" required><br>
+                            <br>
+                            <label for="editDepartment">Department:</label>
+                            <select class="_departments" name="editDepartmentID" id="editDepartmentID" required>
+                            </select><br>
+                            <br>
+                            <label for="personnelID">ID:</label>
+                            <input name="personnelID" class="_personnelID" size='1' readonly><br>
+                            <br>
+                            <input id="editPersonnelSubmit" type="submit" name="submit" value="Submit Edit">
+                        </form>
+                        
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Personnel Edited.
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-success" id="edited">User Edited</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal" tabindex="-1" role="dialog" id="deletePersonnelModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Delete Personnel</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="deletePersonnelForm" name="deletePersonnel" action="javascript:void(0)" method="post" required>
+                            <p><span class="fw-bold">First Name:</span> <span id="deleteFirstName"></span></p>
+                            <p><span class="fw-bold">Second Name:</span> <span id="deleteLastName"></span></p>
+                            <p><span class="fw-bold">Email:</span> <span id="deleteEmail"></span></p>
+                            <p><span class="fw-bold">Department:</span> <span id="deleteDepartmentID"></span></p>
+                            <label for="personnelID">ID:</label>
+                            <input name="personnelID" class="_personnelID" size='1' readonly><br>
+                            <br>
+                            <input id="deletePersonnelSubmit" type="submit" name="submit" value="Submit"><br>
+                        </form>
+                        <br>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Personnel Deleted.
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-success" id="deleted">User Removed</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal" tabindex="-1" role="dialog" id="addLocationModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add Location</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="addLocationForm" name="addLocationForm" action="javascript:void(0)" method="post" required>
+                            <label for="addLocationName">Name:</label>
+                            <input type="text" name="addLocationName" id="addLocationName" size="20" value="" placeholder="Name" required><br>
+                            <br>
+                            <input id="addLocationSubmit" type="submit" name="submit" value="Submit">
+                        </form><br>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Location added.
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-success" id="locationSubmitted">Location Added</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal" tabindex="-1" role="dialog" id="editLocationModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Update Location</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="editLocationForm" name="editLocationForm" action="javascript:void(0)" method="post" required>
+                            <label for="editLocationByID">Update Location:</label>
+                            <select class="_locations" name="editLocationByID" id="editLocationByID" required>
+                            </select><br>
+                            <br>
+                            <label for="editLocationName">New name:</label>
+                            <input type="text" name="editLocationName" id="editLocationName" size="20" value="" placeholder="Name" required><br>
+                            <br>
+                            <input id="editLocationSubmit" type="submit" name="submit" value="Submit">
+                        </form><br>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Location updated.
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-success" id="locationUpdated">Location Updated</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal" tabindex="-1" role="dialog" id="deleteLocationModal">
+
+            <div class="modal-dialog" role="document">
+
+              <div class="modal-content">
+
+                <div class="modal-header">
+                  <h5 class="modal-title">Delete Location</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div>
+                        <form id="deleteLocationForm" name="deleteLocationForm" action="javascript:void(0)" method="post" required>
+                            <label for="deleteLocationID">Location:</label>
+                            <select class="_locations" name="deleteLocationID" id="deleteLocationID" required>
+                            </select><br>
+                            <input id="deleteLocationSubmit" type="submit" name="submit" value="Submit">
+                        </form><br>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Location deleted.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <p class="text-success" id="locationDeleted">Location deleted</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="modal" tabindex="-1" role="dialog" id="addDepartmentModal">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Add Department</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="addDepartmentForm" name="addDepartmentForm" action="javascript:void(0)" method="post" required>
+                            <label for="addDepartmentName">Name:</label>
+                            <input type="text" name="addDepartmentName" id="addDepartmentName" size="20" value="" placeholder="Name" required><br>
+                            <br>
+                            <label for="addLocationID">Location:</label>
+                            <select class="_locations" name="addLocationID" id="addLocationID" required>
+                            </select><br>
+                            <br>
+                            <input id="addDepartmentSubmit" type="submit" name="submit" value="Submit"><br>
+                        </form><br>
+                        <br>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Department Added.
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-success" id="departmentSubmitted">Department Added</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal" tabindex="-1" role="dialog" id="updateDepartmentModal">
+
+            <div class="modal-dialog" role="document">
+
+              <div class="modal-content">
+
+                <div class="modal-header">
+                  <h5 class="modal-title">Update Department</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div>
+                        <form id="updateDepartmentForm" name="updateDepartmentForm" action="javascript:void(0)" method="post" required>
+                            <label for="updateDepartmentID">Update Department:</label>
+                            <select class="_departments" name="updateDepartmentID" id="updateDepartmentID" required>
+                            </select><br>
+                            <br>
+                            <label for="updateDepartmentName">New name:</label>
+                            <input type="text" name="updateDepartmentName" id="updateDepartmentName" size="20" value="" placeholder="Name" required><br>
+                            <br>
+                            <label for="updateLocationID">New location:</label>
+                            <select class="_locations" name="updateLocationID" id="updateLocationID" required>
+                            </select><br>
+                            <br>
+                            <input id="updateDepartmentSubmit" type="submit" name="submit" value="Submit"><br>
+                        </form><br>
+                        <br>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Department Updated.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <p class="text-success" id="departmentUpdated">Department Updated</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+        <div class="modal" tabindex="-1" role="dialog" id="deleteDepartmentModal">
+
+            <div class="modal-dialog" role="document">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Department</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div>
+                            <form id="deleteDepartmentForm" name="deleteDepartmentForm" action="javascript:void(0)" method="post" required>
+                                <label for="deleteDepartmentID">Department:</label>
+                                <select class="_departments" name="deleteDepartmentID" id="deleteDepartmentID" required>
+                                </select><br>
+                                <br>
+                                <input id="deleteDepartmentSubmit" type="submit" name="submit" value="Submit"><br>
+                            </form><br>
+                            <br>
+                            <div class="alert alert-success">
+                                <strong>Success!</strong> Department deleted.
+                            </div>
+                            <div class="alert alert-warning">
+                                <strong>Error!</strong> Cannot delete department with dependants.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <p class="text-success" id="departmentDeleted">Department Deleted</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
         <script type="text/javascript" src="libs/js/script.js"></script>
 
     </body>
