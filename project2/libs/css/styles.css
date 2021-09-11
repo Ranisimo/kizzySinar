@@ -1,36 +1,16 @@
 body {
-    background-color: rgb(14, 44, 44);
+    background-color: #53ccec;
 }
 
-#header {
-    text-align: center;
-    padding-top: 30px;
-    margin-bottom: 30px;
-}
-
-#mainBody {
-    background-color: cornflowerblue;
-    height: 1000px;
-}
-
-#searchBarContainer {
-    display: block;
-    position: relative; 
-    padding: 10px;
-    margin-left: auto; 
-    margin-right: auto; 
-    background-color: azure;
-    justify-content: center;
-    text-align: center;
+.custom {
+    background-color: #fff7d9;
 }
 
 #searchAndGo {
-    display: inline;
-    padding-left: 10px;
-    padding-right: 30px;
+    background-color: blanchedalmond;
 }
 
-#triggerDropDown {
+/* #triggerDropDown {
     display: inline;
     padding-right: 10px;
 }
@@ -40,19 +20,20 @@ body {
     padding-left: 5px;
 }
 
+*/
 #dropDownContainer {
     display: none;
-    visibility: hidden;
     width: 250px;
     height: 100px;
     position: relative;
     margin-left: auto; 
     margin-right: auto; 
+    margin-bottom: 20px;
     background-color: azure;
     text-align: center;
 }
 
-#dropDownContent {
+/* #dropDownContent {
     padding: 10px;
 }
 
@@ -62,4 +43,4 @@ body {
     padding-right: 10px;
     bottom: -2;
     right: 0;
-}
+} */
