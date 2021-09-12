@@ -37,7 +37,7 @@
 
 	$query = $conn->prepare('UPDATE department SET name = ?, locationID = ? WHERE id = ?');
 
-	$query->bind_param("sii", $_POST['updateDepartmentName'], $_POST['editLocationID'], $_POST['updateDepartmentID']);
+	$query->bind_param("sii", $_POST['updateDepartmentName'], $_POST['updateLocationID'], $_POST['updateDepartmentID']);
 
 	$query->execute();
 	
