@@ -20,98 +20,72 @@
 
 
     <body>
-            <div class="container custom">
-                <div class="container">
+        <div class="container custom">
 
-                    <div class="row">
-                        <div class="col m-auto p-3"><h1 class="text-center">Company Directory</h1></div>
-                    </div>
+            <div class="row">
+                <div class="col m-auto p-3"><h1 class="text-center">Company Directory</h1></div>
+            </div>
 
-                        <div class="row p-3" id="searchAndGo">
-                            <div class="col btn-group" role="group">
-                                <input class="form-control" type="text" id="searchQuery" size="20" placeholder="Search Names">
+            <div class="row p-3 mb-2" id="searchAndGo">
+                <div class="col btn-group" role="group">
+                    <input class="form-control" type="text" id="searchQuery" size="20" placeholder="Search Names">
 
-                                <select id="locations" class="_locations custom-select">
-                                    <option disabled selected value="all" id="placeholderLocation">Select by Location</option>
-                                    <option value="all">All Locations</option>
-                                </select>
-                                <select id="departments" class="_departments custom-select">
-                                    <option disabled selected value="all" id="placeholderDepartment">Select from Departments</option>
-                                    <option value="all">All Departments</option>
-                                </select>
-                            
-                                <button class="btn btn-success" id="startSearch" onclick="startSearch()">GO</button>
-                                <button class="btn btn-danger" onclick="resetAll()">Reset</button>
-                            </div> 
-                            <div class="col-md-auto text-center mx-auto"><p id="triggerDropDown" onclick="dropDownToggle()">Advanced Search ▼</p></div>
-                        </div>
-        
-            
-    
-
-                </div>
-                <div class="container">
-                    <div id="dropDownContainer">
-                        <div id="dropDownContent">
-                            <div id="radioSelect">
-                                <p>Search by:</p>
-                                <form>
-                                    <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" id="any" type="radio" value="any" name="name" checked>
-                                        <label for="any">Any</label>
-                                        <input class="custom-control-input" id="forename" type="radio" value="forename" name="name">
-                                        <label for="forename">Forename</label>
-                                        <input class="custom-control-input" id="surname" type="radio" value="surname" name="name">
-                                        <label for="surname">Surname</label> 
-                                    </div>
-                                </form>
-                            </div>
-                            
-
-                            <p onclick="dropDownToggle()">Hide</p>
-                        </div>
-                        
-
-                    </div>
-                    
-
-                </div>
-
-                <div class="row">
-                    <div class="col btn-group"><button id="addEntry" class="btn btn-outline-success" onclick="openAddModal()">Add Personnel</button></div>
-
-                    <div class="col btn-group"><button id="addLocation" class="btn btn-outline-primary" onclick="openAddLocationModal()">Add Location</button>
-                    <button id="updateLocation" class="btn btn-outline-warning" onclick="openUpdateLocationModal()">Update Location</button>
-                    <button id="deleteLocation" class="btn btn-outline-danger" onclick="openDeleteLocationModal()">Delete Location</button></div>
-                    
-                    <div class="col btn-group"><button id="addDepartment" class="btn btn-outline-primary" onclick="openAddDepartmentModal()">Add Department</button>
-                    <button id="updateDepartment" class="btn btn-outline-warning" onclick="openUpdateDepartmentModal()">Update Department</button>
-                    <button id="deleteDepartment" class="btn btn-outline-danger" onclick="openDeleteDepartmentModal()">Delete Department</button></div>
-                </div>
-
-                <div class="row p-3">
-
-                    <table class='table table-striped' id="companyDirectory">
-                        <thead>
-                            <tr>
-                            <th>Forename</th>
-                            <th>Surname</th>
-                            <th>Location</th>
-                            <th>Department</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                            </tr>
-                        </thead>
-                    </table>
-
-                </div>
-
+                    <select id="locations" class="_locations">
+                    </select>
+                    <select id="departments" class="_departments">
+                    </select>
                 
-        
-        </div>
+                    <button class="btn btn-success" id="startSearch" onclick="startSearch()">GO</button>
+                    <button class="btn btn-danger" onclick="resetAll()">Reset</button>
+                </div> 
+                <div class="col-md-auto text-center">
+                    <div class="dropdown" id="dropDownContainer">
+                        <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                            Advanced Settings
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="radioSelect">
+                            <li><span class="dropdown-item-text">Search by:</span></li>
+                            <li><span class="dropdown-item"><input class="custom-control-input" id="any" type="radio" value="any" name="name" checked><label for="any">Any</label></span></li>                           
+                            <li><span class="dropdown-item"><input class="custom-control-input" id="forename" type="radio" value="forename" name="name"><label for="forename">Forename</label></span></li>                           
+                            <li><span class="dropdown-item"><input class="custom-control-input" id="surname" type="radio" value="surname" name="name"><label for="surname">Surname</label></span></li>                       
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-        <div class="modal" tabindex="-1" role="dialog" id="addPersonnelModal">
-            <div class="modal-dialog" role="document">
+            <div class="row">
+                <div class="col btn-group"><button id="addEntry" class="btn btn-success" onclick="openAddModal()">Add Personnel</button></div>
+
+                <div class="col btn-group"><button id="addLocation" class="btn btn-primary" onclick="openAddLocationModal()">Add Location</button>
+                <button id="updateLocation" class="btn btn-warning" onclick="openUpdateLocationModal()">Update Location</button>
+                <button id="deleteLocation" class="btn btn-danger" onclick="openDeleteLocationModal()">Delete Location</button></div>
+                
+                <div class="col btn-group"><button id="addDepartment" class="btn btn-primary" onclick="openAddDepartmentModal()">Add Department</button>
+                <button id="updateDepartment" class="btn btn-warning" onclick="openUpdateDepartmentModal()">Update Department</button>
+                <button id="deleteDepartment" class="btn btn-danger" onclick="openDeleteDepartmentModal()">Delete Department</button></div>
+            </div>
+
+            <div class="row p-3">
+
+                <table class='table table-striped' id="companyDirectory">
+                    <thead>
+                        <tr>
+                        <th>Forename</th>
+                        <th>Surname</th>
+                        <th>Location</th>
+                        <th>Department</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+    </div>
+
+    <!-- START OF MODALS -->
+        <div class="modal" tabindex="-1" id="addPersonnelModal">
+            <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Add Personnel</h5>
@@ -129,8 +103,8 @@
                             <label for="email">Email:</label>
                             <input type="email" name="email" id="entryEmail" size="30" value="" required><br>
                             <br>
-                            <select class="_departments" name="departmentID" required>
-                                <option disabled selected value="all" name="entryDepartment" id="entryDepartment">Select a Department</option>
+                            <select class="_departments" name="departmentID" id="entryDepartment" required>
+                                <option disabled selected value="all" name="entryDepartment">Select a Department</option>
                             </select><br>
                             <br>
                             <input id="addPersonnelSubmit" type="submit" name="submit" value="Submit"><br>
@@ -138,6 +112,9 @@
                         <br>
                         <div class="alert alert-success">
                             <strong>Success!</strong> Personnel Added.
+                        </div>
+                        <div class="alert alert-success">
+                            <strong>Error!</strong> Must select a valid department.
                         </div>
                     </div>
                 </div>
@@ -148,8 +125,8 @@
             </div>
           </div>
 
-          <div class="modal" tabindex="-1" role="dialog" id="editPersonnelModal">
-            <div class="modal-dialog" role="document">
+          <div class="modal" tabindex="-1" id="editPersonnelModal">
+            <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Edit Personnel</h5>
@@ -189,8 +166,8 @@
             </div>
           </div>
 
-          <div class="modal" tabindex="-1" role="dialog" id="deletePersonnelModal">
-            <div class="modal-dialog" role="document">
+          <div class="modal" tabindex="-1" id="deletePersonnelModal">
+            <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Delete Personnel</h5>
@@ -221,8 +198,8 @@
             </div>
           </div>
 
-          <div class="modal" tabindex="-1" role="dialog" id="addLocationModal">
-            <div class="modal-dialog" role="document">
+          <div class="modal" tabindex="-1" id="addLocationModal">
+            <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Add Location</h5>
@@ -248,8 +225,8 @@
             </div>
           </div>
 
-          <div class="modal" tabindex="-1" role="dialog" id="editLocationModal">
-            <div class="modal-dialog" role="document">
+          <div class="modal" tabindex="-1" id="editLocationModal">
+            <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Update Location</h5>
@@ -279,9 +256,9 @@
             </div>
           </div>
 
-          <div class="modal" tabindex="-1" role="dialog" id="deleteLocationModal">
+          <div class="modal" tabindex="-1" id="deleteLocationModal">
 
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog">
 
               <div class="modal-content">
 
@@ -302,6 +279,9 @@
                         <div class="alert alert-success">
                             <strong>Success!</strong> Location deleted.
                         </div>
+                        <div class="alert alert-warning">
+                            <strong>Error!</strong> Cannot delete a location with dependants.
+                        </div>
                     </div>
 
                 </div>
@@ -314,8 +294,8 @@
             </div>
           </div>
 
-          <div class="modal" tabindex="-1" role="dialog" id="addDepartmentModal">
-            <div class="modal-dialog" role="document">
+          <div class="modal" tabindex="-1" id="addDepartmentModal">
+            <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title">Add Department</h5>
@@ -346,9 +326,9 @@
             </div>
           </div>
 
-          <div class="modal" tabindex="-1" role="dialog" id="updateDepartmentModal">
+          <div class="modal" tabindex="-1" id="updateDepartmentModal">
 
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog">
 
               <div class="modal-content">
 
@@ -391,9 +371,9 @@
           </div>
 
 
-        <div class="modal" tabindex="-1" role="dialog" id="deleteDepartmentModal">
+        <div class="modal" tabindex="-1" id="deleteDepartmentModal">
 
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog">
 
                 <div class="modal-content">
 
@@ -404,7 +384,7 @@
 
                     <div class="modal-body">
 
-                        <div>
+                        <div class="">
                             <form id="deleteDepartmentForm" name="deleteDepartmentForm" action="javascript:void(0)" method="post" required>
                                 <label for="deleteDepartmentID">Department:</label>
                                 <select class="_departments" name="deleteDepartmentID" id="deleteDepartmentID" required>
