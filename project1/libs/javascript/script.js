@@ -345,8 +345,8 @@ var weatherModal = function(isoa2){
 
             var unixTimestampSunrise = result['sys']['sunrise'];
             var unixTimestampSunset = result['sys']['sunset'];
-            var sunriseDate = new Date(unixTimestampSunrise * 1000);
-            var sunsetDate = new Date(unixTimestampSunset * 1000);
+            var sunriseDate = new Date(unixTimestampSunrise * 1000).toDateString();
+            var sunsetDate = new Date(unixTimestampSunset * 1000).toDateString();
             document.getElementById('weatherSunSet').innerText = sunriseDate;
             document.getElementById('weatherSunRise').innerText = sunsetDate;
 
@@ -374,17 +374,15 @@ var holidayModal = function(isoa2){
             var holidayList = result['data']['holidays'];
 
             document.getElementById('holidayTitle').innerText = "Holidays in " + $('#countrySelect option:selected').text();
-
+        
             holidayList.forEach(function (holiday){
                 var rowHeader = $("<tr></tr>").appendTo(holidayTable);
-                $('<td></td>').text(holiday.name).appendTo(rowHeader);
-                $('<td></td>').text(holiday.weekday.date.name).appendTo(rowHeader);
-                $('<td></td>').text(holiday.date).appendTo(rowHeader);
-                if (holiday.public) {
-                    $('<td></td>').text('Public holiday').appendTo(rowHeader);
-                } else {
-                    $('<td></td>').text('Not a public holiday').appendTo(rowHeader);
-                };
+                var holidayDate = new Date(holiday.date).toLocaleDateString("en-UK");
+                if (holiday.public === true) {
+                    $('<td></td>').text(holiday.name).appendTo(rowHeader);
+                    $('<td></td>').text(holiday.weekday.date.name).appendTo(rowHeader);
+                    $('<td></td>').text(holidayDate).appendTo(rowHeader);
+                }
             });
            
             $('#modalHoliday').modal('show');
@@ -406,6 +404,9 @@ var covidModal = function(isoa2){
         },
         success: function(result) {
 
+            var covidDate = result['data']['lastUpdated'];
+            var covidDateFormat = new Date(covidDate).toLocaleDateString("en-UK")
+
             document.getElementById('countryCOVIDName').innerText = "COVID Stats in " + $('#countrySelect option:selected').text();
 
             document.getElementById('COVIDDailyConfirmed').innerText = result['data']['dailyConfirmed'].toLocaleString("en-US");
@@ -415,7 +416,7 @@ var covidModal = function(isoa2){
             document.getElementById('COVIDTotalCases').innerText = result['data']['totalConfirmed'].toLocaleString("en-US");
             document.getElementById('COVIDTotalDeaths').innerText = result['data']['totalDeaths'].toLocaleString("en-US");
             document.getElementById('COVIDTotalRecovered').innerText = result['data']['totalRecovered'].toLocaleString("en-US");
-            document.getElementById('COVIDLastUpdated').innerText = result['data']['lastUpdated'];
+            document.getElementById('COVIDLastUpdated').innerText = covidDateFormat;
 
             $('#modalCOVID').modal('show');
         },
