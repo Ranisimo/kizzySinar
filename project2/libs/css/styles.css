@@ -1,5 +1,5 @@
 body {
-    background-color: #53ccec;
+    background-color: #85daf1;
 }
 
 .custom {
@@ -10,37 +10,29 @@ body {
     background-color: blanchedalmond;
 }
 
-/* #triggerDropDown {
-    display: inline;
-    padding-right: 10px;
+.btn-warning {
+    background-color: #ffd862;
 }
 
-#radioSelect > p {
-    text-align: left;
-    padding-left: 5px;
+.btn-success {
+    background-color: #4fa17b;
 }
 
-*/
-#dropDownContainer {
-    display: none;
-    width: 250px;
-    height: 100px;
-    position: relative;
-    margin-left: auto; 
-    margin-right: auto; 
-    margin-bottom: 20px;
-    background-color: azure;
-    text-align: center;
+.btn-danger {
+    background-color: #d1515e;
 }
 
-/* #dropDownContent {
-    padding: 10px;
+.btn-outline-info {
+    color: #000000;
+    border: #000000;
 }
 
-#dropDownContent > p {
-    font-weight: bold;
-    position: absolute;
-    padding-right: 10px;
-    bottom: -2;
-    right: 0;
-} */
+.btn-primary {
+    background-color: #797b7e;
+}
+
+@media screen and (max-width: 480px) {
+    .custom {
+        width: 100vh;
+    }
+  }
