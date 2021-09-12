@@ -1,25 +1,14 @@
-function dropDownToggle() {
-    var x = document.getElementById("dropDownContainer");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    };
-};
-
-/* function closeDropDown() {
-    $('#dropDownContainer').css({"visibility": "hidden", "display": "none"});
-}; */
-
 $(document).ready(function() {
     getAll();
     getDepartments();
     getLocations();
-    $('.alert-success').css({'visibility': 'hidden'});
-    $('.alert-warning').css({'visibility': 'hidden'});
+    hideStatusMessages();
 
     $('#addPersonnelForm').submit(function(e) {
-        if (!confirm('Are you sure you wish to add?')) {
+        if ($('#entryDepartment option:selected').val() === "all") {
+            $('.alert-warning').css({'display': 'block'});
+            return false;
+        } else if (!confirm('Are you sure you wish to add?')) {
             return false;
         } else { 
             $.ajax({
@@ -30,7 +19,7 @@ $(document).ready(function() {
         
                 success: function(result) {
                     
-                    $('.alert-success').css({'visibility': 'visible'});
+                    $('.alert-success').css({'display': 'block'});
                     $('#submitted').css({'visibility': 'visible'});
                     $("#addPersonnelForm")[0].reset();
                     resetAll();
@@ -43,7 +32,7 @@ $(document).ready(function() {
                 }
         
             });
-        }
+        }   
     });
 
     $('#addDepartmentForm').submit(function(e) {
@@ -57,7 +46,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 data: $(this).serialize(),
                 success: function(result) { 
-                    $('.alert-success').css({'visibility': 'visible'});
+                    $('.alert-success').css({'display': 'block'});
                     $("#addDepartmentForm")[0].reset();
                     resetAll();
                 },
@@ -81,7 +70,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 data: $(this).serialize(),
                 success: function(result) { 
-                    $('.alert-success').css({'visibility': 'visible'});
+                    $('.alert-success').css({'display': 'block'});
                     $('#departmentUpdated').css({'visibility': 'visible'});
                     $("#updateDepartmentForm")[0].reset();
                     resetAll();
@@ -109,9 +98,9 @@ $(document).ready(function() {
 
                     resetAll();
                     if (result['status']['code'] === "400") {
-                        $('.alert-warning').css({'visibility': 'visible'});
+                        $('.alert-warning').css({'display': 'block'});
                     } else {
-                        $('.alert-success').css({'visibility': 'visible'});
+                        $('.alert-success').css({'display': 'block'});
                         $('#departmentDeleted').css({'visibility': 'visible'});
                         $("#deleteDepartmentForm")[0].reset();
                         resetAll();
@@ -137,7 +126,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 data: $(this).serialize(),
                 success: function(result) {
-                    $('.alert-success').css({'visibility': 'visible'});
+                    $('.alert-success').css({'display': 'block'});
                     $('#locationSubmitted').css({'visibility': 'visible'});
                     $("#addLocationForm")[0].reset();
                 },
@@ -161,7 +150,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 data: $(this).serialize(),
                 success: function(result) {
-                    $('.alert-success').css({'visibility': 'visible'});
+                    $('.alert-success').css({'display': 'block'});
                     $('#locationUpdated').css({'visibility': 'visible'});
                     $("#editLocationForm")[0].reset();
                 },
@@ -187,9 +176,9 @@ $(document).ready(function() {
                 success: function(result) {
 
                     if (result['status']['code'] === "400") {
-                        $('.alert-warning').css({'visibility': 'visible'});
+                        $('.alert-warning').css({'display': 'block'});
                     } else {
-                        $('.alert-success').css({'visibility': 'visible'});
+                        $('.alert-success').css({'display': 'block'});
                         $('#locationDeleted').css({'visibility': 'visible'});
                         $("#deleteLocationForm")[0].reset();
                         resetAll();
@@ -278,6 +267,19 @@ function getDepartments() {
             var departmentSelect = $('._departments');
             departmentSelect.empty();
 
+            $('<option>', {
+                text: 'Select from Department',
+                value: 'all',
+                id: 'placeholderDepartment',
+                disabled: true,
+                selected: true
+            }).appendTo(departmentSelect);
+
+            $('<option>', {
+                text: 'All Departments',
+                value: 'all'
+            }).appendTo(departmentSelect);
+
             departments.forEach(function (department){
                 $('<option>', {
                     text: department.name,
@@ -305,6 +307,19 @@ function getLocations() {
             var locations = result['data'];
             var locationSelect = $('._locations');
             locationSelect.empty();
+
+            $('<option>', {
+                text: 'Select a Location',
+                value: 'all',
+                id: 'placeholderLocation',
+                disabled: true,
+                selected: true
+            }).appendTo(locationSelect);
+
+            $('<option>', {
+                text: 'All Locations',
+                value: 'all'
+            }).appendTo(locationSelect);
 
             locations.forEach(function (location){
                 $('<option>', {
@@ -344,9 +359,11 @@ function populateTable(data) {
         $('<td></td>').text(entry.location).appendTo(row);
         $('<td></td>').text(entry.department).appendTo(row);
 
-        $('<td><button></button></td>').text("Edit").attr('id', 'edit'+entry.id).appendTo(row);
+        var editTD = $('<td></td>').appendTo(row);
+        $('<button></button>').text("Edit").attr('id', 'edit'+entry.id).addClass("btn-warning").appendTo(editTD);
         
-        $('<td><button></button></td>').text("Delete").attr('id', 'delete'+entry.id).appendTo(row);
+        var deleteTD = $('<td></td>').appendTo(row);
+        $('<button></button>').text("Delete").attr('id', 'delete'+entry.id).addClass("btn-danger").appendTo(deleteTD);
 
         $('#edit'+entry.id).click(function() {
             $('#edited').css({'visibility': 'hidden'});
@@ -516,8 +533,8 @@ function startSearch(){
 };
 
 function hideStatusMessages() {
-    $('.alert-success').css({'visibility': 'hidden'});
-    $('.alert-warning').css({'visibility': 'hidden'});
+    $('.alert-success').css({'display': 'none'});
+    $('.alert-warning').css({'display': 'none'});
 }
 
 function openAddModal() {
@@ -561,3 +578,7 @@ function openUpdateDepartmentModal() {
     hideStatusMessages();
     $('#updateDepartmentModal').modal('show');
 }
+
+$('#updateDepartmentID').change(function() {
+    $('#updateDepartmentName').attr('value', $('#updateDepartmentID option:selected').text());
+});
