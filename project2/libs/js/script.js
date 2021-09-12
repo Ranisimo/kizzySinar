@@ -1,7 +1,4 @@
 $('.text-success').css({'visibility': 'visible'});
-
-
-
 $(document).ready(function() {
     getAll();
     getDepartments();
@@ -42,7 +39,11 @@ $(document).ready(function() {
 
     $('#editPersonnelForm').submit(function(e) {
         e.preventDefault();
-        if (!confirm('Are you sure you wish to edit?')) {
+        if ($('#editDepartmentID option:selected').val() === "all") {
+            hideStatusMessages();
+            $('.alert-warning').css({'display': 'block'});
+            return false;
+        } else if (!confirm('Are you sure you wish to edit?')) {
             return false;
         } else {    
             hideStatusMessages();
@@ -54,7 +55,7 @@ $(document).ready(function() {
         
                 success: function(result) {
 
-                    $('.alert-success').css({'visibility': 'visible'});
+                    $('.alert-success').css({'display': 'block'});
                     $('#edited').css({'display': 'block'});
                     resetAll();
 
