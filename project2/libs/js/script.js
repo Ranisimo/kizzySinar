@@ -1,3 +1,7 @@
+$('.text-success').css({'visibility': 'visible'});
+
+
+
 $(document).ready(function() {
     getAll();
     getDepartments();
@@ -11,6 +15,7 @@ $(document).ready(function() {
         } else if (!confirm('Are you sure you wish to add?')) {
             return false;
         } else { 
+            hideStatusMessages();
             $.ajax({
                 type: "POST",
                 url: "libs/php/insertPersonnel.php",
@@ -20,7 +25,7 @@ $(document).ready(function() {
                 success: function(result) {
                     
                     $('.alert-success').css({'display': 'block'});
-                    $('#submitted').css({'visibility': 'visible'});
+                    $('#submitted').css({'display': 'block'});
                     $("#addPersonnelForm")[0].reset();
                     resetAll();
         
@@ -35,169 +40,12 @@ $(document).ready(function() {
         }   
     });
 
-    $('#addDepartmentForm').submit(function(e) {
-        e.preventDefault();
-        if (!confirm('Are you sure you wish to add?')) {
-            return false;
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "libs/php/insertDepartment.php",
-                dataType: 'json',
-                data: $(this).serialize(),
-                success: function(result) { 
-                    $('.alert-success').css({'display': 'block'});
-                    $("#addDepartmentForm")[0].reset();
-                    resetAll();
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                }
-            });
-        }
-    });
-
-    $('#updateDepartmentForm').submit(function(e) {
-        e.preventDefault();
-        if (!confirm('Are you sure you wish to update?')) {
-            return false;
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "libs/php/updateDepartmentByID.php",
-                dataType: 'json',
-                data: $(this).serialize(),
-                success: function(result) { 
-                    $('.alert-success').css({'display': 'block'});
-                    $('#departmentUpdated').css({'visibility': 'visible'});
-                    $("#updateDepartmentForm")[0].reset();
-                    resetAll();
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                }
-            });
-        }
-    });
-
-    $('#deleteDepartmentForm').submit(function(e) {
-        e.preventDefault();
-        if (!confirm('Are you sure you wish to delete?')) {
-            return false;
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "libs/php/deleteDepartmentByID.php",
-                dataType: 'json',
-                data: $(this).serialize(),
-                success: function(result) { 
-
-                    resetAll();
-                    if (result['status']['code'] === "400") {
-                        $('.alert-warning').css({'display': 'block'});
-                    } else {
-                        $('.alert-success').css({'display': 'block'});
-                        $('#departmentDeleted').css({'visibility': 'visible'});
-                        $("#deleteDepartmentForm")[0].reset();
-                        resetAll();
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                }
-            });
-        }
-    });
-
-    $('#addLocationForm').submit(function(e) {
-        e.preventDefault();
-        if (!confirm('Are you sure you wish to add?')) {
-            return false;
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "libs/php/insertLocation.php",
-                dataType: 'json',
-                data: $(this).serialize(),
-                success: function(result) {
-                    $('.alert-success').css({'display': 'block'});
-                    $('#locationSubmitted').css({'visibility': 'visible'});
-                    $("#addLocationForm")[0].reset();
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                }
-            });
-        }
-    });
-
-    $('#editLocationForm').submit(function(e) {
-        e.preventDefault();
-        if (!confirm('Are you sure you wish to update?')) {
-            return false;
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "libs/php/updateLocationByID.php",
-                dataType: 'json',
-                data: $(this).serialize(),
-                success: function(result) {
-                    $('.alert-success').css({'display': 'block'});
-                    $('#locationUpdated').css({'visibility': 'visible'});
-                    $("#editLocationForm")[0].reset();
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                }
-            });
-        }
-    });
-
-    $('#deleteLocationForm').submit(function(e) {
-        e.preventDefault();
-        if (!confirm('Are you sure you wish to delete?')) {
-            return false;
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "libs/php/deleteLocationByID.php",
-                dataType: 'json',
-                data: $(this).serialize(),
-                success: function(result) {
-
-                    if (result['status']['code'] === "400") {
-                        $('.alert-warning').css({'display': 'block'});
-                    } else {
-                        $('.alert-success').css({'display': 'block'});
-                        $('#locationDeleted').css({'visibility': 'visible'});
-                        $("#deleteLocationForm")[0].reset();
-                        resetAll();
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                }
-            });
-        }
-    });
-
     $('#editPersonnelForm').submit(function(e) {
         e.preventDefault();
         if (!confirm('Are you sure you wish to edit?')) {
             return false;
         } else {    
+            hideStatusMessages();
             $.ajax({
                 type: "POST",
                 url: "libs/php/updatePersonnelByID.php",
@@ -207,7 +55,7 @@ $(document).ready(function() {
                 success: function(result) {
 
                     $('.alert-success').css({'visibility': 'visible'});
-                    $('#edited').css({'visibility': 'visible'});
+                    $('#edited').css({'display': 'block'});
                     resetAll();
 
                 },
@@ -229,7 +77,7 @@ $(document).ready(function() {
 
             var personnelID = $("#personnelID").attr('value')
 
-        
+            hideStatusMessages();
             $.ajax({
                 type: "POST",
                 url: "libs/php/deletePersonnelByID.php",
@@ -238,8 +86,8 @@ $(document).ready(function() {
         
                 success: function(result) {
 
-                    $('.alert-success').css({'visibility': 'visible'});
-                    $('#deleted').css({'visibility': 'visible'});
+                    $('.alert-success').css({'display': 'block'});
+                    $('#deleted').css({'display': 'block'});
                     resetAll();
 
                 },
@@ -253,6 +101,192 @@ $(document).ready(function() {
         }
     });
 
+    $('#addDepartmentForm').submit(function(e) {
+        e.preventDefault();
+        if ($('#addLocationID option:selected').val() === "all") {
+            hideStatusMessages();
+            $('.alert-warning').css({'display': 'block'});
+            return false;
+        } else if (!confirm('Are you sure you wish to add?')) {
+            return false;
+        } else {
+            hideStatusMessages();
+            $.ajax({
+                type: "POST",
+                url: "libs/php/insertDepartment.php",
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function(result) { 
+                    $('.alert-success').css({'display': 'block'});
+                    $("#addDepartmentForm")[0].reset();
+                    resetAll();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+    });
+
+    $('#updateDepartmentForm').submit(function(e) {
+        e.preventDefault();
+        hideStatusMessages();
+        if ($('#updateLocationID option:selected').val() === "all" || $('#updateDepartmentID option:selected').val() === "all") {
+            $('.warning-pre').css({'display': 'block'});
+            return false;
+        } else if (!confirm('Are you sure you wish to update?')) {
+            return false;
+        } else {
+            hideStatusMessages();
+            $.ajax({
+                type: "POST",
+                url: "libs/php/updateDepartmentByID.php",
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function(result) { 
+                    $('.alert-success').css({'display': 'block'});
+                    $('#departmentUpdated').css({'display': 'block'});
+                    $("#updateDepartmentForm")[0].reset();
+                    resetAll();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+    });
+
+    $('#deleteDepartmentForm').submit(function(e) {
+        e.preventDefault();
+        if ($('.errorfix option:selected').val() === "all") {
+            $('.warning-pre').css({'display': 'block'});
+            return false;
+        } else if (!confirm('Are you sure you wish to delete?')) {
+            return false;
+        } else {
+            hideStatusMessages();
+            $.ajax({
+                type: "POST",
+                url: "libs/php/deleteDepartmentByID.php",
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function(result) { 
+                    
+                    if (result['status']['code'] === "400") {
+                        $('.alert-warning').css({'display': 'block'});
+                        $('.warning-pre').css({'display': 'none'});
+                    } else {
+                        $('.alert-success').css({'display': 'block'});
+                        $('.alert-warning').css({'display': 'none'});
+                        $('#departmentDeleted').css({'display': 'block'});
+                        $("#deleteDepartmentForm")[0].reset();
+                        resetAll();
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+    });
+
+    $('#addLocationForm').submit(function(e) {
+        e.preventDefault();
+        if (!confirm('Are you sure you wish to add?')) {
+            return false;
+        } else {
+            hideStatusMessages();
+            $.ajax({
+                type: "POST",
+                url: "libs/php/insertLocation.php",
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function(result) {
+                    $('.alert-success').css({'display': 'block'});
+                    $('#locationSubmitted').css({'display': 'block'});
+                    $("#addLocationForm")[0].reset();
+                    resetAll();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+    });
+
+    $('#editLocationForm').submit(function(e) {
+        e.preventDefault();
+        hideStatusMessages();
+        if ($('#editLocationByID option:selected').val() === "all") {
+            $('.warning-pre').css({'display': 'block'});
+            return false;
+        } else if (!confirm('Are you sure you wish to update?')) {
+            return false;
+        } else {
+            hideStatusMessages();
+            $.ajax({
+                type: "POST",
+                url: "libs/php/updateLocationByID.php",
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function(result) {
+                    $('.alert-success').css({'display': 'block'});
+                    $('#locationUpdated').css({'display': 'block'});
+                    $("#editLocationForm")[0].reset();
+                    resetAll();
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+    });
+
+    $('#deleteLocationForm').submit(function(e) {
+        e.preventDefault();
+        if ($('#deleteLocationID option:selected').val() === "all") {
+            $('.warning-pre').css({'display': 'block'});
+            return false;
+        } else if (!confirm('Are you sure you wish to delete?')) {
+            return false;
+        } else {
+            hideStatusMessages();
+            $.ajax({
+                type: "POST",
+                url: "libs/php/deleteLocationByID.php",
+                dataType: 'json',
+                data: $(this).serialize(),
+                success: function(result) {
+
+                    if (result['status']['code'] === "400") {
+                        $('.alert-warning').css({'display': 'block'});
+                        $('.warning-pre').css({'display': 'none'});
+                    } else {
+                        $('.alert-success').css({'display': 'block'});
+                        $('.alert-warning').css({'display': 'none'});
+                        $('#locationDeleted').css({'display': 'block'});
+                        $("#deleteLocationForm")[0].reset();
+                        resetAll();
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
+        }
+    });
     return false;
 });
 
@@ -366,7 +400,7 @@ function populateTable(data) {
         $('<button></button>').text("Delete").attr('id', 'delete'+entry.id).addClass("btn-danger").appendTo(deleteTD);
 
         $('#edit'+entry.id).click(function() {
-            $('#edited').css({'visibility': 'hidden'});
+            $('#edited').css({'display': 'none'});
             hideStatusMessages()
             $('#editPersonnelModal').modal('show');
             $('#editFirstName').attr('value',entry.firstName);
@@ -377,7 +411,7 @@ function populateTable(data) {
         });
 
         $('#delete'+entry.id).click(function() {
-            $('#deleted').css({'visibility': 'hidden'});
+            $('#deleted').css({'display': 'none'});
             hideStatusMessages()
             $('#deletePersonnelModal').modal('show');
             $('#deleteFirstName').text(entry.firstName);
@@ -533,48 +567,41 @@ function startSearch(){
 };
 
 function hideStatusMessages() {
-    $('.alert-success').css({'display': 'none'});
-    $('.alert-warning').css({'display': 'none'});
+    $('.alert').css({'display': 'none'});
+    $('.text-success').css({'display': 'none'});
 }
 
 function openAddModal() {
-    $('#submitted').css({'visibility': 'hidden'});
     hideStatusMessages();
     $('#addPersonnelModal').modal('show');
 };
 
 function openAddLocationModal() {
-    $('#locationSubmitted').css({'visibility': 'hidden'});
     hideStatusMessages();
     $('#addLocationModal').modal('show');
 };
 
 function openAddDepartmentModal() {
-    $('#departmentSubmitted').css({'visibility': 'hidden'});
     hideStatusMessages();
     $('#addDepartmentModal').modal('show');
 };
 
 function openDeleteLocationModal() {
-    $('#locationDeleted').css({'visibility': 'hidden'});
     hideStatusMessages();
     $('#deleteLocationModal').modal('show');
 }
 
 function openDeleteDepartmentModal() {
-    $('#departmentDeleted').css({'visibility': 'hidden'});
     hideStatusMessages();
     $('#deleteDepartmentModal').modal('show');
 }
 
 function openUpdateLocationModal() {
-    $('#locationUpdated').css({'visibility': 'hidden'});
     hideStatusMessages();
     $('#editLocationModal').modal('show');
 }
 
 function openUpdateDepartmentModal() {
-    $('#departmentUpdated').css({'visibility': 'hidden'});
     hideStatusMessages();
     $('#updateDepartmentModal').modal('show');
 }
