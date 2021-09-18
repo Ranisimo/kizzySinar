@@ -36,19 +36,37 @@
 	// SQL statement accepts parameters and so is prepared to avoid SQL injection.
 	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
 
-	$query = $conn->prepare('DELETE FROM department WHERE id = ?');
+	$prequery = $conn->prepare('SELECT * FROM personnel WHERE departmentID = ?');
 	
- 	$query->bind_param("i", $_POST['departmentID']);
+	$prequery->bind_param("i", $_POST['id']);
 
-	$query->execute();
+	$prequery->execute();
 
-	$query->store_result();
+	$prequery->store_result();
+	
+	if ($prequery->affected_rows === 0) {
 
-	$output['status']['code'] = "200";
-	$output['status']['name'] = "ok";
-	$output['status']['description'] = "success";
+		$output['status']['code'] = "200";
+		$output['status']['name'] = "ok";
+		$output['status']['description'] = "success";
+		$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+		$output['data'] = 'Department has no dependants';
+		$output['result'] = $prequery->affected_rows;
+		
+		mysqli_close($conn);
+
+		echo json_encode($output);  
+
+		exit;
+
+	}
+
+	$output['status']['code'] = "400";
+	$output['status']['name'] = "executed";
+	$output['status']['description'] = "query failed";
 	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
-	$output['data'] = [];
+	$output['data'] = 'Cannot delete department with dependants.';
+	$output['result'] = $prequery->affected_rows;
 	
 	mysqli_close($conn);
 

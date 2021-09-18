@@ -27,43 +27,38 @@
 
 	}	
 
-	$query = $conn->prepare('SELECT * from personnel WHERE id = ?');
 
-	$query->bind_param("i", $_REQUEST['editID']);
-
-	$query->execute();
+	$prequery = $conn->prepare('SELECT * FROM department WHERE locationID = ?');
 	
-	if (false === $query) {
+	$prequery->bind_param("s", $_POST['id']);
 
-		$output['status']['code'] = "400";
-		$output['status']['name'] = "executed";
-		$output['status']['description'] = "query failed";	
-		$output['data'] = [];
+	$prequery->execute();
 
+	$prequery->store_result();
+	
+	if ($prequery->affected_rows === 0) {
+
+		$output['status']['code'] = "200";
+		$output['status']['name'] = "ok";
+		$output['status']['description'] = "success";
+		$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+		$output['data'] = 'Department has no dependants';
+		$output['result'] = $prequery->affected_rows;
+		
 		mysqli_close($conn);
 
-		echo json_encode($output); 
+		echo json_encode($output);  
 
 		exit;
 
 	}
-    
-	$result = $query->get_result();
 
-   	$personnel = [];
-
-	while ($row = mysqli_fetch_assoc($result)) {
-
-		array_push($personnel, $row);
-
-	}
-
-
-	$output['status']['code'] = "200";
-	$output['status']['name'] = "ok";
-	$output['status']['description'] = "success";
+	$output['status']['code'] = "400";
+	$output['status']['name'] = "executed";
+	$output['status']['description'] = "query failed";
 	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
-	$output['data']['personnel'] = $personnel;
+	$output['data'] = 'Cannot delete department with dependants.';
+	$output['result'] = $prequery->affected_rows;
 	
 	mysqli_close($conn);
 
