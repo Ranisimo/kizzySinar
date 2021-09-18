@@ -14,367 +14,16 @@
         <!--Bootstrap Latest compiled and minified CSS -->
         <!-- CSS only -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <link rel="stylesheet" href="libs/css/styles.css" type="text/css">
     </head>
 
 
     <body>
-        <!-- START OF MODALS -->
-            <div id="addPersonnelModal" class="modal" tabindex="-1">
 
-                <div class="modal-dialog">
-                    <div class='modal-content'>
-                    
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Personnel</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-            
-                    <div class='modal-body'>
-            
-                        <div>
-                            <form id="addPersonnelForm" name="addPersonnel" action="javascript:void(0)" method="post" required>
-                                <label for="firstName">First Name:</label>
-                                <input type="text" name="firstName" id="entryFirstName" size="20" value="" placeholder="First Name" required><br>
-                                <br>
-                                <label for="lastName">Second Name:</label>
-                                <input type="text" name="lastName" id="entryLastName" size="20" value="" placeholder="Last Name" required><br>
-                                <br>
-                                <label for="email">Email:</label>
-                                <input type="email" name="email" id="entryEmail" size="30" value="" required><br>
-                                <br>
-                                <select class="_departments" name="departmentID" id="entryDepartment" required>
-                                    <option disabled selected value="all" name="entryDepartment">Select a Department</option>
-                                </select><br>
-                                <br>
-                                <input id="addPersonnelSubmit" type="submit" name="submit" value="Submit"><br>
-                            </form>
-                            <br>
-                            <div class="alert alert-success">
-                                <strong>Success!</strong> Personnel Added.
-                            </div>
-                            <div class="alert alert-warning">
-                                <strong>Error!</strong> Must select a valid department.
-                            </div>
-                        </div> 
-            
-                    </div>
-            
-                    <div class="modal-footer">
-                        <div><p class="text-success" id="submitted">User Submitted</p></div>
-                    </div>
-            
-                    </div>  
-                    
-                </div>
-            </div>
-
-            <div class="modal" tabindex="-1" id="editPersonnelModal">
-                <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title">Edit Personnel</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <form id="editPersonnelForm" name="editPersonnel" action="javascript:void(0)" method="post" required>
-                                <label for="editFirstName">First Name:</label>
-                                <input type="text" name="editFirstName" id="editFirstName" size="20" value="" placeholder="First Name" required><br>
-                                <br>
-                                <label for="editLastName">Second Name:</label>
-                                <input type="text" name="editLastName" id="editLastName" size="20" value="" placeholder="Last Name" required><br>
-                                <br>
-                                <label for="editEmail">Email:</label>
-                                <input type="email" name="editEmail" id="editEmail" size="30" value="" required><br>
-                                <br>
-                                <label for="editDepartment">Department:</label>
-                                <select class="_departments" name="editDepartmentID" id="editDepartmentID" required>
-                                </select><br>
-                                <br>
-                                <label for="personnelID">ID:</label>
-                                <input name="personnelID" class="_personnelID" size='1' readonly><br>
-                                <br>
-                                <input id="editPersonnelSubmit" type="submit" name="submit" value="Submit Edit">
-                            </form>
-                            
-                            <div class="alert alert-success">
-                                <strong>Success!</strong> Personnel Edited.
-                            </div>
-                            <div class="alert alert-warning">
-                                <strong>Error!</strong> Select a valid department.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <p class="text-success" id="edited">User Edited</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <div class="modal" tabindex="-1" id="deletePersonnelModal">
-                <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title">Delete Personnel</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <form id="deletePersonnelForm" name="deletePersonnel" action="javascript:void(0)" method="post" required>
-                                <p><span class="fw-bold">First Name:</span> <span id="deleteFirstName"></span></p>
-                                <p><span class="fw-bold">Second Name:</span> <span id="deleteLastName"></span></p>
-                                <p><span class="fw-bold">Email:</span> <span id="deleteEmail"></span></p>
-                                <p><span class="fw-bold">Department:</span> <span id="deleteDepartmentID"></span></p>
-                                <label for="personnelID">ID:</label>
-                                <input name="personnelID" class="_personnelID" size='1' readonly><br>
-                                <br>
-                                <input id="deletePersonnelSubmit" type="submit" name="submit" value="Submit"><br>
-                            </form>
-                            <br>
-                            <div class="alert alert-success">
-                                <strong>Success!</strong> Personnel Deleted.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <p class="text-success" id="deleted">User Removed</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <div class="modal" tabindex="-1" id="addLocationModal">
-                <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title">Add Location</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <form id="addLocationForm" name="addLocationForm" action="javascript:void(0)" method="post" required>
-                                <label for="addLocationName">Name:</label>
-                                <input type="text" name="addLocationName" id="addLocationName" size="20" value="" placeholder="Name" required><br>
-                                <br>
-                                <input id="addLocationSubmit" type="submit" name="submit" value="Submit">
-                            </form><br>
-                            <div class="alert alert-success">
-                                <strong>Success!</strong> Location added.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <p class="text-success" id="locationSubmitted">Location Added</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <div class="modal" tabindex="-1" id="editLocationModal">
-                <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title">Update Location</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <form id="editLocationForm" name="editLocationForm" action="javascript:void(0)" method="post" required>
-                                <label for="editLocationByID">Update Location:</label>
-                                <select class="_locations" name="editLocationByID" id="editLocationByID" required>
-                                </select><br>
-                                <br>
-                                <label for="editLocationName">New name:</label>
-                                <input type="text" name="editLocationName" id="editLocationName" size="20" value="" placeholder="Name" required><br>
-                                <br>
-                                <input id="editLocationSubmit" type="submit" name="submit" value="Submit">
-                            </form><br>
-                            <div class="alert alert-success">
-                                <strong>Success!</strong> Location updated.
-                            </div>
-                            <div class="alert alert-warning warning-pre">
-                                <strong>Error!</strong> Select a valid location.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <p class="text-success" id="locationUpdated">Location Updated</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <div class="modal" tabindex="-1" id="deleteLocationModal">
-
-                <div class="modal-dialog modal-dialog-centered">
-
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                    <h5 class="modal-title">Delete Location</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body">
-
-                        <div>
-                            <form id="deleteLocationForm" name="deleteLocationForm" action="javascript:void(0)" method="post" required>
-                                <label for="deleteLocationID">Location:</label>
-                                <select class="_locations" name="deleteLocationID" id="deleteLocationID" required>
-                                </select><br>
-                                <input id="deleteLocationSubmit" type="submit" name="submit" value="Submit">
-                            </form><br>
-                            <div class="alert alert-success">
-                                <strong>Success!</strong> Location deleted.
-                            </div>
-                            <div class="alert alert-warning">
-                                <strong>Error!</strong> Cannot delete a location with dependants.
-                            </div>
-                            <div class="alert alert-warning warning-pre">
-                                <strong>Error!</strong> Select a valid location.
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <p class="text-success" id="locationDeleted">Location deleted</p>
-                    </div>
-
-                </div>
-                </div>
-            </div>
-
-            <div class="modal" tabindex="-1" id="addDepartmentModal">
-                <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title">Add Department</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <form id="addDepartmentForm" name="addDepartmentForm" action="javascript:void(0)" method="post" required>
-                                <label for="addDepartmentName">Name:</label>
-                                <input type="text" name="addDepartmentName" id="addDepartmentName" size="20" value="" placeholder="Name" required><br>
-                                <br>
-                                <label for="addLocationID">Location:</label>
-                                <select class="_locations" name="addLocationID" id="addLocationID" required>
-                                </select><br>
-                                <br>
-                                <input id="addDepartmentSubmit" type="submit" name="submit" value="Submit"><br>
-                            </form><br>
-                            <br>
-                            <div class="alert alert-success">
-                                <strong>Success!</strong> Department Added.
-                            </div>
-                            <div class="alert alert-warning">
-                                <strong>Error!</strong> Select a valid location.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <p class="text-success" id="departmentSubmitted">Department Added</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <div class="modal" tabindex="-1" id="updateDepartmentModal">
-
-                <div class="modal-dialog modal-dialog-centered">
-
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                    <h5 class="modal-title">Update Department</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body">
-
-                        <div>
-                            <form id="updateDepartmentForm" name="updateDepartmentForm" action="javascript:void(0)" method="post" required>
-                                <label for="updateDepartmentID">Update Department:</label>
-                                <select class="_departments" name="updateDepartmentID" id="updateDepartmentID" required>
-                                </select><br>
-                                <br>
-                                <label for="updateDepartmentName">New name:</label>
-                                <input type="text" name="updateDepartmentName" id="updateDepartmentName" size="20" value="" placeholder="Name" required><br>
-                                <br>
-                                <label for="updateLocationID">New location:</label>
-                                <select class="_locations" name="updateLocationID" id="updateLocationID" required>
-                                </select><br>
-                                <br>
-                                <input id="updateDepartmentSubmit" type="submit" name="submit" value="Submit"><br>
-                            </form><br>
-                            <br>
-                            <div class="alert alert-success">
-                                <strong>Success!</strong> Department Updated.
-                            </div>
-                            <div class="alert alert-warning warning-pre">
-                                <strong>Error!</strong> Select a valid department or location.
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <p class="text-success" id="departmentUpdated">Department Updated</p>
-                    </div>
-
-                </div>
-                </div>
-            </div>
-
-            <div class="modal" tabindex="-1" id="deleteDepartmentModal">
-
-                <div class="modal-dialog modal-dialog-centered">
-
-                    <div class="modal-content">
-
-                        <div class="modal-header">
-                            <h5 class="modal-title">Delete Department</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <div class="modal-body">
-
-                            <div class="">
-                                <form id="deleteDepartmentForm" name="deleteDepartmentForm" action="javascript:void(0)" method="post" required>
-                                    <label for="deleteDepartmentID">Department:</label>
-                                    <select class="_departments errorfix" name="deleteDepartmentID" id="deleteDepartmentID" required>
-                                    </select><br>
-                                    <br>
-                                    <input id="deleteDepartmentSubmit" type="submit" name="submit" value="Submit"><br>
-                                </form><br>
-                                <br>
-                                <div class="alert alert-success">
-                                    <strong>Success!</strong> Department deleted.
-                                </div>
-                                <div class="alert alert-warning">
-                                    <strong>Error!</strong> Cannot delete department with dependants.
-                                </div>
-                                <div class="alert alert-warning warning-pre">
-                                    <strong>Error!</strong> Select a valid department.
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <p class="text-success" id="departmentDeleted">Department Deleted</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        <div class="container custom d-flex flex-column">
+        <div class="container custom flex-column">
 
             <div class="row">
                 <div class="col m-auto p-3"><h1 class="text-center">Company Directory</h1></div>
@@ -411,37 +60,478 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col btn-group"><button id="addEntry" class="btn btn-success" onclick="openAddModal()">Add Personnel</button></div>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-personnel" role="tab">Personnel</a>
+                  <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" href="#nav-departments" role="tab">Departments</a>
+                  <a class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" href="#nav-locations" role="tab">Locations</a>
+                </div>
+            </nav>
 
-                <div class="col btn-group"><button id="addLocation" class="btn btn-primary" onclick="openAddLocationModal()">Add Location</button>
-                <button id="updateLocation" class="btn btn-warning" onclick="openUpdateLocationModal()">Update Location</button>
-                <button id="deleteLocation" class="btn btn-danger" onclick="openDeleteLocationModal()">Delete Location</button></div>
-                
-                <div class="col btn-group"><button id="addDepartment" class="btn btn-primary" onclick="openAddDepartmentModal()">Add Department</button>
-                <button id="updateDepartment" class="btn btn-warning" onclick="openUpdateDepartmentModal()">Update Department</button>
-                <button id="deleteDepartment" class="btn btn-danger" onclick="openDeleteDepartmentModal()">Delete Department</button></div>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="nav-personnel" role="tabpanel" aria-labelledby="personnel-tab">
+
+                    <button id="addEntry" class="btn btn-success" onclick="openAddModal()">Add Personnel</button>
+
+                    <div class="table-responsive">
+
+                        <table class='table table-striped table-hover' id="companyDirectoryPersonnel">
+                            <thead>
+                                <tr>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="nav-departments" role="tabpanel" aria-labelledby="departments-tab">
+                    <div class="col btn-group"><button id="addDepartment" class="btn btn-primary" onclick="openAddDepartmentModal()">Add Department</button></div>
+
+                        <div class="row p-3 table-responsive">
+
+                            <table class='table table-striped table-hover table-sm' id="companyDirectoryDepartments">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                            </table>
+    
+                        </div>
+                </div>
+
+                <div class="tab-pane fade" id="nav-locations" role="tabpanel" aria-labelledby="locations-tab">
+                    <div class="col btn-group"><button id="addLocation" class="btn btn-primary" onclick="openAddLocationModal()">Add Location</button></div>
+
+                        <div class="row p-3 table-responsive">
+
+                            <table class='table table-striped table-hover table-sm' id="companyDirectoryLocations">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                    </tr>
+                                </thead>
+                            </table>
+    
+                        </div>
+                </div>
             </div>
 
-            <div class="row p-3 table-responsive">
+            
+        </div>
 
-                <table class='table table-striped table-sm' id="companyDirectory">
-                    <thead>
-                        <tr>
-                        <th scope="col">Forename</th>
-                        <th scope="col">Surname</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Department</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
-                        </tr>
-                    </thead>
-                </table>
+        <!-- START OF MODALS -->
+        <div id="addPersonnelModal" class="modal" tabindex="-1">
 
+            <div class="modal-dialog">
+                <div class='modal-content'>
+                
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Personnel</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+            
+                    <div class='modal-body'>
+            
+                        <div class="container px-5 my-5">
+                            <form id="addPersonnelForm" name="addPersonnel" action="javascript:void(0)" method="post" required>
+                                <div class="mb-3">
+                                    <label class="form-label" for="firstName">First Name</label>
+                                    <input class="form-control" name="firstName" id="entryFirstName" type="text" placeholder="First Name" data-sb-validations="required" />
+                                    <div class="invalid-feedback" data-sb-feedback="firstName:required">First Name is required.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="lastName">Last Name</label>
+                                    <input class="form-control" name="lastName" id="entryLastName" type="text" placeholder="Last Name" data-sb-validations="required" />
+                                    <div class="invalid-feedback" data-sb-feedback="lastName:required">Last Name is required.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="email">Email Address</label>
+                                    <input class="form-control" name="email" id="entryEmail" type="email" placeholder="Email Address" data-sb-validations="required,email" />
+                                    <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is required.</div>
+                                    <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
+                                </div>
+                                <label class="form-label" for="entryDepartment">Department</label>
+                                <select class="_departments form-select" name="departmentID" id="entryDepartment" required>
+                                    <option disabled selected value="all" name="entryDepartment">Select a Department</option>
+                                </select><br>
+                                <br>
+                            </form>
+                            <br>
+                            <div class="alert alert-success">
+                                <strong>Success!</strong> Personnel Added.
+                            </div>
+                            <div class="alert alert-warning">
+                                <strong>Error!</strong> Must select a valid department.
+                            </div>
+                            <div class="alert alert-warning warning-confirm">
+                                <strong>Error! Are you sure?</strong> 
+                                <button class="btn btn-primary" id="addPersonnelSubmit" type="submit" form="addPersonnelForm">Yes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            </div>
+                        </div> 
+            
+                    </div>
+            
+                    <div class="modal-footer">
+                        <button class="btn btn-primary triggerConfirm" onClick="showConfirm()">Add</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+        
+                </div>  
+                
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" id="editPersonnelModal">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Edit Personnel</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="editPersonnelForm" name="editPersonnel" action="javascript:void(0)" method="post" required>
+                            <label for="editFirstName">First Name:</label>
+                            <input type="text" name="editFirstName" id="editFirstName" size="20" value="" placeholder="First Name" required><br>
+                            <br>
+                            <label for="editLastName">Second Name:</label>
+                            <input type="text" name="editLastName" id="editLastName" size="20" value="" placeholder="Last Name" required><br>
+                            <br>
+                            <label for="editEmail">Email:</label>
+                            <input type="email" name="editEmail" id="editEmail" size="30" value="" required><br>
+                            <br>
+                            <label for="editDepartment">Department:</label>
+                            <select class="_departments" name="editDepartmentID" id="editDepartmentID" required>
+                            </select><br>
+                            <br>
+                            <input name="personnelID" class="_personnelID idHide" size='1' readonly>
+                            <br>
+                        </form>
+                        
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Personnel Edited.
+                        </div>
+                        <div class="alert alert-warning">
+                            <strong>Error!</strong> Select a valid department.
+                        </div>
+                        <div class="alert alert-warning warning-confirm">
+                            <strong>Error! Are you sure?</strong> 
+                            <button class="btn btn-primary" id="editPersonnelSubmit" type="submit" form="editPersonnelForm">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary triggerConfirm" onClick="showConfirm()">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" id="deletePersonnelModal">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Delete Personnel</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="deletePersonnelForm" name="deletePersonnel" action="javascript:void(0)" method="post" required>
+                            <p><span class="fw-bold">First Name:</span> <span id="deleteFirstName"></span></p>
+                            <p><span class="fw-bold">Second Name:</span> <span id="deleteLastName"></span></p>
+                            <p><span class="fw-bold">Email:</span> <span id="deleteEmail"></span></p>
+                            <p><span class="fw-bold">Department:</span> <span id="deleteDepartmentID"></span></p>
+                            <input name="personnelID" class="_personnelID" size='1' readonly><br>
+                            <br>
+                            
+                        </form>
+                        <br>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Personnel Deleted.
+                        </div>
+                        <div class="alert alert-warning warning-confirm">
+                            <strong>Error! Are you sure?</strong> 
+                            <button class="btn btn-primary" id="deletePersonnelSubmit" type="submit" form="deletePersonnelForm">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary triggerConfirm" onClick="showConfirm()">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" id="addLocationModal">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Add Location</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="addLocationForm" name="addLocationForm" action="javascript:void(0)" method="post" required>
+                            <label for="addLocationName">Name:</label>
+                            <input type="text" name="addLocationName" id="addLocationName" size="20" value="" placeholder="Name" required><br>
+                            <br>
+                            
+                        </form><br>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Location added.
+                        </div>
+                        <div class="alert alert-warning warning-confirm">
+                            <strong>Error! Are you sure?</strong> 
+                            <button class="btn btn-primary" id="addLocationSubmit" type="submit" form="addLocationForm">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary triggerConfirm" onClick="showConfirm()">Add</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" id="editLocationModal">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Update Location</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form id="editLocationForm" name="editLocationForm" action="javascript:void(0)" method="post" required>
+                            <label for="editLocationName">Name:</label>
+                            <input type="text" name="editLocationName" id="editLocationName" size="20" value="" placeholder="Name" required><br>
+                            <br>
+                            <input type="integer" name="editLocationID" id="editLocationID" value="">
+                        </form><br>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Location updated.
+                        </div>
+                        <div class="alert alert-warning warning-pre">
+                            <strong>Error!</strong> Select a valid location.
+                        </div>
+                        <div class="alert alert-warning warning-confirm">
+                            <strong>Error! Are you sure?</strong> 
+                            <button class="btn btn-primary" id="editLocationSubmit" type="submit" form="editLocationForm">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary triggerConfirm" onClick="showConfirm()">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" id="deleteLocationModal">
+
+            <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                <h5 class="modal-title">Delete Location</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div>
+                        <p>Location: <span id="deleteLocationName"></span></p>
+                        <form id="deleteLocationForm" name="deleteLocationForm" action="javascript:void(0)" method="post" required> 
+                            <input id="deleteLocationID">
+                        </form><br>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Location deleted.
+                        </div>
+                        <div class="alert alert-warning">
+                            <strong>Error!</strong> Cannot delete a location with dependants.
+                        </div>
+                        <div class="alert alert-warning warning-confirm">
+                            <strong>Error! Are you sure?</strong> 
+                            <button class="btn btn-primary" id="deleteLocationSubmit" type="submit" form="deleteLocationForm">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary triggerConfirm" onClick="showConfirm()">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" id="addDepartmentModal">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Add Department</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container px-5 my-5">
+                        <form id="addDepartmentForm" name="addDepartmentForm" action="javascript:void(0)" method="post" required>
+                            <div class="mb-3">
+                                <label class="form-label" for="addDepartmentName">Name:</label>
+                                <input class="form-control" type="text" name="addDepartmentName" id="addDepartmentName" size="20" value="" placeholder="Name" data-sb-validations="required"><br>
+                                <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="addLocationID">Location:</label>
+                                <select class="_locations form-select" name="addLocationID" id="addLocationID" required>
+                                </select>
+                            </div>
+                            
+                        </form>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Department Added.
+                        </div>
+                        <div class="alert alert-warning">
+                            <strong>Error!</strong> Select a valid location.
+                        </div>
+                        <div class="alert alert-warning warning-confirm">
+                            <strong>Error! Are you sure?</strong> 
+                            <button class="btn btn-primary" id="addDepartmentSubmit" type="submit" form="addDepartmentForm">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary triggerConfirm" onClick="showConfirm()">Add</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" id="updateDepartmentModal">
+
+            <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                <h5 class="modal-title">Update Department</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div>
+                        <form id="updateDepartmentForm" name="updateDepartmentForm" action="javascript:void(0)" method="post" required>
+                            <label for="updateDepartmentName">Name:</label>
+                            <input type="text" name="updateDepartmentName" id="updateDepartmentName" size="20" value="" placeholder="Name" required><br>
+                            <br>
+                            <label for="updateLocationID">Location:</label>
+                            <select class="_locations form-select" name="updateLocationID" id="updateLocationID" required>
+                            </select><br>
+                            <input id="updateDepartmentID" name="updateDepartmentID" class="_departmentID idHide" size='1' readonly>
+                        </form>
+                        <br>
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Department Updated.
+                        </div>
+                        <div class="alert alert-warning warning-pre">
+                            <strong>Error!</strong> Select a valid department or location.
+                        </div>
+                        <div class="alert alert-warning warning-confirm">
+                            <strong>Error! Are you sure?</strong> 
+                            <button class="btn btn-primary" id="updateDepartmentSubmit" type="submit" form="updateDepartmentForm">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary triggerConfirm" onClick="showConfirm()">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" id="deleteDepartmentModal">
+
+            <div class="modal-dialog modal-dialog-centered">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Department</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="">
+                            <p>Department: <span id="deleteDepartmentName"></span></p>
+                            <form id="deleteDepartmentForm" name="deleteDepartmentForm" action="javascript:void(0)" method="post" required>
+                                <input id="deleteDepartmenByID">
+                                <br>
+                            </form>
+                            <p></p>
+                            <br>
+                            <div class="alert alert-success">
+                                <strong>Success!</strong> Department deleted.
+                            </div>
+                            <div class="alert alert-warning">
+                                <strong>Error!</strong> Cannot delete department with dependants.
+                            </div>
+                            <div class="alert alert-warning warning-confirm">
+                                <strong>Error! Are you sure?</strong> 
+                                <button type="submit" id="deleteDepartmentSubmit" class="btn btn-primary" form="deleteDepartmentForm">Yes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-primary triggerConfirm" onClick="showConfirm()">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
             </div>
         </div>
             
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
         <script type="text/javascript" src="libs/js/script.js"></script>
+        
     </body>
 
 
