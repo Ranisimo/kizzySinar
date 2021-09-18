@@ -30,7 +30,7 @@
 
 	$query = $conn->prepare('UPDATE location SET name = ? WHERE id = ?');
 
-	$query->bind_param("si", $_POST['editLocationName'],  $_POST['editLocationByID']);
+	$query->bind_param("si", $_POST['editLocationName'],  $_POST['editLocationID']);
 
 	$query->execute();
 	
