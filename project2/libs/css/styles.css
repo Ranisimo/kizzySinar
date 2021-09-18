@@ -1,34 +1,19 @@
 body {
     background-color: #85daf1;
+    height: 100vh;
 }
 
 .custom {
-    background-color: #fff7d9;
+    display: flex;
+    background-color: hsl(47, 100%, 93%);
 }
 
 #searchAndGo {
     background-color: blanchedalmond;
 }
 
-.btn-warning {
-    background-color: #ffd862;
-}
-
-.btn-success {
-    background-color: #4fa17b;
-}
-
-.btn-danger {
-    background-color: #d1515e;
-}
-
-.btn-outline-info {
-    color: #000000;
-    border: #000000;
-}
-
-.btn-primary {
-    background-color: #797b7e;
+.idHide {
+    visibility: hidden;
 }
 
 #companyDirectory {
@@ -39,4 +24,9 @@ body {
     .custom {
         width: 100%;
     }
+}
+
+th {
+    position: sticky;
+    top: 0;
 }
