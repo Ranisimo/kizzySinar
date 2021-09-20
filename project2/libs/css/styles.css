@@ -53,9 +53,7 @@ body {
 
 th {
     position: sticky;
-    padding-top: 25px;
     top: 0;
-    background-color: rgb(255, 255, 255);
 }
  
 #addDepartment, #addEntry, #addLocation { 

@@ -403,19 +403,11 @@ function resetAll() {
 }
 
 function populatePersonnelTable(data) {
-    var directoryDiv = $("<div></div>").addClass("table-responsive-sm").appendTo('#nav-personnel');
-    var companyDirectoryPersonnel = $("<table></table>").attr("id", "companyDirectoryPersonnel").addClass("table table-sm table-striped table-hover").appendTo(directoryDiv);
-    var directoryHead = $("<thead></thead>").appendTo(companyDirectoryPersonnel);
+    var companyDirectoryPersonnel = $("#companyDirectoryPersonnel")
     var directoryBody = $("<tbody></tbody>").appendTo(companyDirectoryPersonnel);
     $('#companyDirectoryPersonnel tbody').empty();
 
     var directoryResult = data;
-
-    $("<th></th>").text("Full Name").appendTo(directoryHead);
-    $("<th></th>").text("Location").addClass("hideTH").appendTo(directoryHead);
-    $("<th></th>").text("Department").appendTo(directoryHead);
-    $("<th></th>").text("Edit").appendTo(directoryHead);
-    $("<th></th>").text("Delete").appendTo(directoryHead);
 
     directoryResult.forEach(function (entry){
         var lastName = entry.lastName;
@@ -477,16 +469,9 @@ function populateDepartmentTable() {
         dataType: 'json',
         data: {},
         success: function(result) {
-            var directoryDiv = $("<div></div>").addClass("table-responsive-sm").appendTo('#nav-departments');
-            var companyDirectoryDepartment = $("<table></table>").attr("id", "companyDirectoryDepartment").addClass("table table-striped table-hover").appendTo(directoryDiv);
-            var directoryHead = $("<thead></thead>").appendTo(companyDirectoryDepartment);
+            var companyDirectoryDepartment = $("#companyDirectoryDepartment")
             var directoryBody = $("<tbody></tbody>").appendTo(companyDirectoryDepartment);
             $('#companyDirectoryDepartment tbody').empty();
-
-            $("<th></th>").text("Name").appendTo(directoryHead);
-            $("<th></th>").text("Location").appendTo(directoryHead);
-            $("<th></th>").text("Edit").appendTo(directoryHead);
-            $("<th></th>").text("Delete").appendTo(directoryHead);
 
             var directoryResult = result['data'];
 
@@ -525,17 +510,11 @@ function populateDepartmentTable() {
 };
 
 function populateLocationTable(data) {
-    var directoryDiv = $("<div></div>").addClass("table-responsive-sm").appendTo('#nav-locations');
-    var companyDirectoryLocation = $("<table></table>").attr("id", "companyDirectoryLocation").addClass("table table-striped table-hover").appendTo(directoryDiv);
-    var directoryHead = $("<thead></thead>").appendTo(companyDirectoryLocation);
+    var companyDirectoryLocation = $("#companyDirectoryLocation")
     var directoryBody = $("<tbody></tbody>").appendTo(companyDirectoryLocation);
     $('#companyDirectoryLocation tbody').empty();
 
     var directoryResult = data;
-
-    $("<th></th>").text("Name").appendTo(directoryHead);
-    $("<th></th>").text("Edit").appendTo(directoryHead);
-    $("<th></th>").text("Delete").appendTo(directoryHead);
 
     directoryResult.forEach(function (entry){
         var row = $("<tr></tr>").addClass("content").appendTo(directoryBody);
