@@ -22,6 +22,15 @@
 
 
     <body>
+        <div id="preloader">
+            <div class="loading">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div
+        ></div>
 
         <div class="container custom flex-column">
 
@@ -68,64 +77,22 @@
                 </div>
             </nav>
 
-            <div class="tab-content" id="myTabContent">
+            <div class="tab-content container" id="myTabContent">
+                
                 <div class="tab-pane fade show active" id="nav-personnel" role="tabpanel" aria-labelledby="personnel-tab">
 
                     <button id="addEntry" class="btn btn-success" onclick="openAddModal()">Add Personnel</button>
 
-                    <div class="table-responsive">
-
-                        <table class='table table-striped table-hover' id="companyDirectoryPersonnel">
-                            <thead>
-                                <tr>
-                                <th scope="col">Full Name</th>
-                                <th scope="col">Location</th>
-                                <th scope="col">Department</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Delete</th>
-                                </tr>
-                            </thead>
-                        </table>
-
-                    </div>
-
                 </div>
 
-                <div class="tab-pane fade" id="nav-departments" role="tabpanel" aria-labelledby="departments-tab">
+                <div class="tab-pane fade table-responsive" id="nav-departments" role="tabpanel" aria-labelledby="departments-tab">
                     <div class="col btn-group"><button id="addDepartment" class="btn btn-primary" onclick="openAddDepartmentModal()">Add Department</button></div>
 
-                        <div class="row p-3 table-responsive">
-
-                            <table class='table table-striped table-hover table-sm' id="companyDirectoryDepartments">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Location</th>
-                                    <th scope="col">Edit</th>
-                                    <th scope="col">Delete</th>
-                                    </tr>
-                                </thead>
-                            </table>
-    
-                        </div>
                 </div>
 
-                <div class="tab-pane fade" id="nav-locations" role="tabpanel" aria-labelledby="locations-tab">
+                <div class="tab-pane fade table-responsive" id="nav-locations" role="tabpanel" aria-labelledby="locations-tab">
                     <div class="col btn-group"><button id="addLocation" class="btn btn-primary" onclick="openAddLocationModal()">Add Location</button></div>
 
-                        <div class="row p-3 table-responsive">
-
-                            <table class='table table-striped table-hover table-sm' id="companyDirectoryLocations">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Edit</th>
-                                    <th scope="col">Delete</th>
-                                    </tr>
-                                </thead>
-                            </table>
-    
-                        </div>
                 </div>
             </div>
 

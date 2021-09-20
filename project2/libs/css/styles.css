@@ -1,11 +1,25 @@
+html {
+    background-color: #85daf1;
+}
+
 body {
     background-color: #85daf1;
     height: 100vh;
 }
 
 .custom {
-    display: flex;
     background-color: hsl(47, 100%, 93%);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#myTabContent  {
+    background-color: #ffffff;
+    flex: 1;
+    overflow: auto;
+    padding: 0;
+    border: 1px solid gray;
 }
 
 #searchAndGo {
@@ -13,20 +27,111 @@ body {
 }
 
 .idHide {
-    visibility: hidden;
+    display: none;
 }
 
-#companyDirectory {
-    display: table;
+.table-responsive-sm {
+    padding-left: 5px;
 }
 
 @media screen and (max-width: 480px) {
     .custom {
         width: 100%;
     }
+
+    .hideTH {
+        display: none;
+    }
+
+    th {
+        position: sticky;
+        padding-top: 25px;
+        top: 0;
+        background-color: rgb(255, 255, 255);
+    }
 }
 
 th {
     position: sticky;
+    padding-top: 25px;
     top: 0;
+    background-color: rgb(255, 255, 255);
+}
+ 
+#addDepartment, #addEntry, #addLocation { 
+    margin: 5px;
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #f3f3f3;
+    z-index: 99;
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+
+.dot {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(to bottom, #FF284E, #FF4E9A);
+    margin: 5px;
+    border-radius: 50%
+}
+
+.dot::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(242, 14, 59, 0.4);
+    border-radius: inherit;
+    animation: wave 1.6s ease-out infinite
+}
+
+@keyframes wave {
+    from {
+        width: 200%;
+        height: 200%;
+        opacity: 1
+    }
+
+    to {
+        width: 100%;
+        height: 100%;
+        opacity: 0
+    }
+}
+
+.dot:nth-child(1)::before {
+    animation-delay: 0s
+}
+
+.dot:nth-child(2)::before {
+    animation-delay: 0.3s
+}
+
+.dot:nth-child(3)::before {
+    animation-delay: 0.6s
+}
+
+.dot:nth-child(4)::before {
+    animation-delay: 0.9s
+}
+
+.dot:nth-child(5)::before {
+    animation-delay: 1.3s
 }

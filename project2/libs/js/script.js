@@ -1,4 +1,11 @@
-$('.text-success').css({'visibility': 'visible'});
+$(window).on('load', function () {
+    if (
+        $('#preloader').length) {$('#preloader').delay(1000).fadeOut('slow',function () {
+            $(this).remove();
+        });
+    }
+});
+
 $(document).ready(function() {
     getAll();
     getDepartments();
@@ -396,17 +403,26 @@ function resetAll() {
 }
 
 function populatePersonnelTable(data) {
-    var directoryBody = $("<tbody></tbody>").appendTo('#companyDirectoryPersonnel');
+    var directoryDiv = $("<div></div>").addClass("table-responsive-sm").appendTo('#nav-personnel');
+    var companyDirectoryPersonnel = $("<table></table>").attr("id", "companyDirectoryPersonnel").addClass("table table-sm table-striped table-hover").appendTo(directoryDiv);
+    var directoryHead = $("<thead></thead>").appendTo(companyDirectoryPersonnel);
+    var directoryBody = $("<tbody></tbody>").appendTo(companyDirectoryPersonnel);
     $('#companyDirectoryPersonnel tbody').empty();
 
     var directoryResult = data;
+
+    $("<th></th>").text("Full Name").appendTo(directoryHead);
+    $("<th></th>").text("Location").addClass("hideTH").appendTo(directoryHead);
+    $("<th></th>").text("Department").appendTo(directoryHead);
+    $("<th></th>").text("Edit").appendTo(directoryHead);
+    $("<th></th>").text("Delete").appendTo(directoryHead);
 
     directoryResult.forEach(function (entry){
         var lastName = entry.lastName;
         var fullName = lastName.toUpperCase() + ', ' + entry.firstName;
         var row = $("<tr></tr>").addClass("content").appendTo(directoryBody);
         $('<td></td>').text(fullName).appendTo(row);
-        $('<td></td>').text(entry.location).appendTo(row);
+        $('<td></td>').text(entry.location).addClass("hideTH").appendTo(row);
         $('<td></td>').text(entry.department).appendTo(row);
 
         var editTD = $('<td></td>').appendTo(row);
@@ -461,8 +477,16 @@ function populateDepartmentTable() {
         dataType: 'json',
         data: {},
         success: function(result) {
-            var directoryBody = $("<tbody></tbody>").appendTo('#companyDirectoryDepartments');
-            $('#companyDirectoryDepartments tbody').empty();
+            var directoryDiv = $("<div></div>").addClass("table-responsive-sm").appendTo('#nav-departments');
+            var companyDirectoryDepartment = $("<table></table>").attr("id", "companyDirectoryDepartment").addClass("table table-striped table-hover").appendTo(directoryDiv);
+            var directoryHead = $("<thead></thead>").appendTo(companyDirectoryDepartment);
+            var directoryBody = $("<tbody></tbody>").appendTo(companyDirectoryDepartment);
+            $('#companyDirectoryDepartment tbody').empty();
+
+            $("<th></th>").text("Name").appendTo(directoryHead);
+            $("<th></th>").text("Location").appendTo(directoryHead);
+            $("<th></th>").text("Edit").appendTo(directoryHead);
+            $("<th></th>").text("Delete").appendTo(directoryHead);
 
             var directoryResult = result['data'];
 
@@ -501,10 +525,17 @@ function populateDepartmentTable() {
 };
 
 function populateLocationTable(data) {
-    var directoryBody = $("<tbody></tbody>").appendTo('#companyDirectoryLocations');
-    $('#companyDirectoryLocations tbody').empty();
+    var directoryDiv = $("<div></div>").addClass("table-responsive-sm").appendTo('#nav-locations');
+    var companyDirectoryLocation = $("<table></table>").attr("id", "companyDirectoryLocation").addClass("table table-striped table-hover").appendTo(directoryDiv);
+    var directoryHead = $("<thead></thead>").appendTo(companyDirectoryLocation);
+    var directoryBody = $("<tbody></tbody>").appendTo(companyDirectoryLocation);
+    $('#companyDirectoryLocation tbody').empty();
 
     var directoryResult = data;
+
+    $("<th></th>").text("Name").appendTo(directoryHead);
+    $("<th></th>").text("Edit").appendTo(directoryHead);
+    $("<th></th>").text("Delete").appendTo(directoryHead);
 
     directoryResult.forEach(function (entry){
         var row = $("<tr></tr>").addClass("content").appendTo(directoryBody);
