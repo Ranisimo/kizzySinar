@@ -19,6 +19,7 @@ body {
     flex: 1;
     overflow: auto;
     padding: 0;
+    margin-bottom: 10px;
     border: 1px solid gray;
 }
 
@@ -30,8 +31,12 @@ body {
     display: none;
 }
 
-.table-responsive-sm {
+.companyDirectoryPersonnel {
     padding-left: 5px;
+}
+
+.alert {
+    margin: 10px;
 }
 
 @media screen and (max-width: 480px) {
@@ -43,21 +48,22 @@ body {
         display: none;
     }
 
-    th {
+    thead {
         position: sticky;
         padding-top: 25px;
         top: 0;
-        background-color: rgb(255, 255, 255);
     }
 }
 
-th {
+thead {
     position: sticky;
     top: 0;
+    z-index: 1;
 }
  
 #addDepartment, #addEntry, #addLocation { 
     margin: 5px;
+    width: 98%;
 }
 
 #preloader {
