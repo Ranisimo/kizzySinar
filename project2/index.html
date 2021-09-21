@@ -176,10 +176,8 @@
                                 <label class="form-label" for="entryDepartment">Department</label>
                                 <select class="_departments form-select" name="departmentID" id="entryDepartment" required>
                                     <option disabled selected value="all" name="entryDepartment">Select a Department</option>
-                                </select><br>
-                                <br>
+                                </select>
                             </form>
-                            <br>
                             <div class="alert alert-success">
                                 <strong>Success!</strong> Personnel Added.
                             </div>
@@ -215,19 +213,28 @@
                 <div class="modal-body">
                     <div>
                         <form id="editPersonnelForm" name="editPersonnel" action="javascript:void(0)" method="post" required>
-                            <label class="form-label" for="editFirstName">First Name:</label>
-                            <input class="form-control" type="text" name="editFirstName" id="editFirstName" size="20" value="" placeholder="First Name" data-sb-validations="required">
-                            <div class="invalid-feedback" data-sb-feedback="firstName:required">First Name is required.</div>
-                            <label class="form-label" for="editLastName">Second Name:</label>
-                            <input class="form-control" type="text" name="editLastName" id="editLastName" size="20" value="" placeholder="Last Name" data-sb-validations="required">
-                            <div class="invalid-feedback" data-sb-feedback="lastName:required">Last Name is required.</div>
-                            <label class="form-label" for="editEmail">Email:</label>
-                            <input class="form-control" type="email" name="editEmail" id="editEmail" size="30" value="" data-sb-validations="required,email">
-                            <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is required.</div>
-                            <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
-                            <label class="form-label" for="editDepartment">Department:</label>
-                            <select class="_departments form-select" name="editDepartmentID" id="editDepartmentID" required>
-                            </select>
+                            <div class="mb-3">
+                                <label class="form-label" for="editFirstName">First Name:</label>
+                                <input class="form-control" type="text" name="editFirstName" id="editFirstName" size="20" value="" placeholder="First Name" data-sb-validations="required">
+                                <div class="invalid-feedback" data-sb-feedback="firstName:required">First Name is required.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editLastName">Second Name:</label>
+                                <input class="form-control" type="text" name="editLastName" id="editLastName" size="20" value="" placeholder="Last Name" data-sb-validations="required">
+                                <div class="invalid-feedback" data-sb-feedback="lastName:required">Last Name is required.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editEmail">Email:</label>
+                                <input class="form-control" type="email" name="editEmail" id="editEmail" size="30" value="" data-sb-validations="required,email">
+                                <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is required.</div>
+                                <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editDepartment">Department:</label>
+                                <select class="_departments form-select" name="editDepartmentID" id="editDepartmentID" required>
+                                </select>
+                            </div>
+                            
                             <input name="personnelID" class="_personnelID idHide" size='1' readonly>
                         </form>
                         
@@ -266,11 +273,8 @@
                             <p><span class="fw-bold">Second Name:</span> <span id="deleteLastName"></span></p>
                             <p><span class="fw-bold">Email:</span> <span id="deleteEmail"></span></p>
                             <p><span class="fw-bold">Department:</span> <span id="deleteDepartmentID"></span></p>
-                            <input name="personnelID" class="_personnelID" size='1' readonly><br>
-                            <br>
-                            
+                            <input name="personnelID" class="_personnelID" size='1' readonly>
                         </form>
-                        <br>
                         <div class="alert alert-success">
                             <strong>Success!</strong> Personnel Deleted.
                         </div>
@@ -299,11 +303,10 @@
                 <div class="modal-body">
                     <div>
                         <form id="addLocationForm" name="addLocationForm" action="javascript:void(0)" method="post" required>
-                            <label for="addLocationName">Name:</label>
-                            <input type="text" name="addLocationName" id="addLocationName" size="20" value="" placeholder="Name" required><br>
-                            <br>
-                            
-                        </form><br>
+                            <label class="form-label" for="addLocationName">Name:</label>
+                            <input class="form-control" type="text" name="addLocationName" id="addLocationName" size="20" value="" placeholder="Name" data-sb-validations="required">
+                            <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
+                        </form>
                         <div class="alert alert-success">
                             <strong>Success!</strong> Location added.
                         </div>
@@ -332,11 +335,10 @@
                 <div class="modal-body">
                     <div>
                         <form id="editLocationForm" name="editLocationForm" action="javascript:void(0)" method="post" required>
-                            <label for="editLocationName">Name:</label>
-                            <input type="text" name="editLocationName" id="editLocationName" size="20" value="" placeholder="Name" required><br>
-                            <br>
+                            <label class="form-label" for="editLocationName">Name:</label>
+                            <input class="form-control" type="text" name="editLocationName" id="editLocationName" size="20" value="" placeholder="Name" required>
                             <input type="integer" name="editLocationID" id="editLocationID" value="">
-                        </form><br>
+                        </form>
                         <div class="alert alert-success">
                             <strong>Success!</strong> Location updated.
                         </div>
@@ -375,7 +377,7 @@
                         <p>Location: <span id="deleteLocationName"></span></p>
                         <form id="deleteLocationForm" name="deleteLocationForm" action="javascript:void(0)" method="post" required> 
                             <input id="deleteLocationID">
-                        </form><br>
+                        </form>
                         <div class="alert alert-success">
                             <strong>Success!</strong> Location deleted.
                         </div>
@@ -392,7 +394,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="btn btn-primary triggerConfirm" onClick="showConfirm()">Delete</button>
+                    <button class="btn btn-primary" id="triggerLocationDeleteConfirm" onClick="showConfirm()">Delete</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
 
@@ -412,7 +414,7 @@
                         <form id="addDepartmentForm" name="addDepartmentForm" action="javascript:void(0)" method="post" required>
                             <div class="mb-3">
                                 <label class="form-label" for="addDepartmentName">Name:</label>
-                                <input class="form-control" type="text" name="addDepartmentName" id="addDepartmentName" size="20" value="" placeholder="Name" data-sb-validations="required"><br>
+                                <input class="form-control" type="text" name="addDepartmentName" id="addDepartmentName" size="20" value="" placeholder="Name" data-sb-validations="required">
                                 <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
                             </div>
                             <div class="mb-3">
@@ -456,17 +458,21 @@
 
                 <div class="modal-body">
 
-                    <div>
+                    <div class="container px-5 my-5">
                         <form id="updateDepartmentForm" name="updateDepartmentForm" action="javascript:void(0)" method="post" required>
-                            <label for="updateDepartmentName">Name:</label>
-                            <input type="text" name="updateDepartmentName" id="updateDepartmentName" size="20" value="" placeholder="Name" required><br>
-                            <br>
-                            <label for="updateLocationID">Location:</label>
-                            <select class="_locations form-select" name="updateLocationID" id="updateLocationID" required>
-                            </select><br>
+                            <div class="mb-3">
+                                <label class="form-label" for="updateDepartmentName">Name:</label>
+                                <input class="form-control" type="text" name="updateDepartmentName" id="updateDepartmentName" size="20" value="" placeholder="Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="updateLocationID">Location:</label>
+                                <select class="_locations form-select" name="updateLocationID" id="updateLocationID" required>
+                                </select>
+                            </div>
+                            
                             <input id="updateDepartmentID" name="updateDepartmentID" class="_departmentID idHide" size='1' readonly>
                         </form>
-                        <br>
+
                         <div class="alert alert-success">
                             <strong>Success!</strong> Department Updated.
                         </div>
@@ -507,11 +513,9 @@
                         <div class="">
                             <p>Department: <span id="deleteDepartmentName"></span></p>
                             <form id="deleteDepartmentForm" name="deleteDepartmentForm" action="javascript:void(0)" method="post" required>
-                                <input id="deleteDepartmenByID">
-                                <br>
+                                <input class="form-label" id="deleteDepartmenByID">
                             </form>
-                            <p></p>
-                            <br>
+
                             <div class="alert alert-success">
                                 <strong>Success!</strong> Department deleted.
                             </div>
@@ -528,7 +532,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button class="btn btn-primary triggerConfirm" onClick="showConfirm()">Delete</button>
+                        <button class="btn btn-primary" id="triggerDepartmentDeleteConfirm" onClick="showConfirm()">Delete</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
 
