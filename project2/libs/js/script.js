@@ -268,9 +268,9 @@ function checkForDepartmentDependants(id) {
             if (result['status']['code'] === "400") {
                 $('.alert-warning').css({'display': 'block'});
                 $('.warning-confirm').css({'display': 'none'});
-                $('.triggerConfirm').css({'display': 'none'});
+                $('#triggerDepartmentDeleteConfirm').css({'display': 'none'});
             } else {
-                $('.triggerConfirm').css({'display': 'block'});
+                $('#triggerDepartmentDeleteConfirm').css({'display': 'block'});
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -291,9 +291,9 @@ function checkForLocationDependants(id) {
             if (result['status']['code'] === "400") {
                 $('.alert-warning').css({'display': 'block'});
                 $('.warning-confirm').css({'display': 'none'});
-                $('.triggerConfirm').css({'display': 'none'});
+                $('#triggerLocationDeleteConfirm').css({'display': 'none'});
             } else {
-                $('.triggerConfirm').css({'display': 'block'});
+                $('#triggerLocationDeleteConfirm').css({'display': 'block'});
             } 
         },
         error: function(jqXHR, textStatus, errorThrown) {
